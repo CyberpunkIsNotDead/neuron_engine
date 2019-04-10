@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Главная страница</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'neuron_engine/neutral.css' %}">
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+        <div class="page"></div>
+            <h1>Доски</h1>
+            <div class="boards_list">
+            {% for board, counter in info.items %}
+                <a href={% url 'board' board.url %}>{{ board.name }}</a> | {{ counter }} постов<br>
+            {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

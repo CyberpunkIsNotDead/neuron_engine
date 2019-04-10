@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ board.name }} — {{ original_post.subject }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'neuron_engine/neutral.css' %}">
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <header>
+      <div class="navigation">
+        <a href={% url 'board' board.url %}><div class="return" >←</div></a>
+          <a href={% url 'main_page' %}>Главная страница</a> | 
+          Доски: 
+          {% for board in boards %}
+            <a href={% url 'board' board.url %}>{{ board.name }}</a> |
+          {% endfor %}
+      </div>
+    </header>
+    <div class="page">
+      <h1>{{ board.name }}</h1>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+          {{ form.as_table }}
+        </table>
+        <button type="submit">Отправить</button>
+      </form>
+      <hr>
+<!-- thread start -->
+      <div class="thread">
+        {% for original_post, files in op_with_files.items %}
+          <div class="original_post">
+            <h2>{% if original_post.subject %}<span class="post_theme">{{ original_post.subject }}</span> {% endif %}<span class="author">{{ original_post.author }}</span> <span class="pub_date">{{ original_post.pub_date|date:"D, d E Y H:i:s" }}</span> <span class="counter">#{{ original_post.counter }}</span></h2>
+            {% if files %}
+              {% if files|length == 1 %}
+                <div class="files">
+                  {% for file in files %}
+                    <div class="file"><a href="{{ file.upload.url }}"><img class="resized" src="{{ file.upload.url }}"></a></div>
+                  {% endfor %}
+                </div>
+                <div class="text">{{ original_post.text|linebreaks }}</div>
+              {% else %}
+                <div class="files">
+                  {% for file in files %}
+                    <div class="file_block"><a href="{{ file.upload.url }}"><img class="resized" src="{{ file.upload.url }}"></a></div>
+                  {% endfor %}
+                </div>
+                <div class="text">{{ original_post.text|linebreaks }}</div>
+              {% endif %}
+            {% else %}
+              <div class="text">{{ original_post.text|linebreaks }}</div>
+            {% endif %}
+            {% if replies_to_op %}
+              <div class="replies">
+                Ответы: 
+                {% for link, url in replies_to_op %}
+                  <a href="{{ url }}">{{ link }}</a> 
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+        {% if replies_sets %}
+          {% for reply_with_files, replies_to_reply in replies_sets %}
+            {% with counter=forloop.counter %}
+              {% for reply, files in reply_with_files.items %}
+              <div class="post_wrapper">
+                <div class="reply" id="{{ reply.counter }}">
+                  <h2><span class="post_counter">{{ counter }}</span> {% if reply.subject %}<span class="post_theme">{{ reply.subject }}</span> {% endif %}<span class="author">{{ reply.author }}</span> <span class="pub_date">{{ reply.pub_date|date:"D, d E Y H:i:s" }} <span class="counter">#{{ reply.counter }}</span> <a href="#{{ reply.counter }}">[Ссылка]</a></span></h2>
+                  {% if files %}
+                    {% if files|length == 1 %}
+                      <div class="files">
+                        {% for file in files %}
+                          <div class="file"><a href="{{ file.upload.url }}"><img class="resized" src="{{ file.upload.url }}"></a></div>
+                        {% endfor %}
+                      </div>
+                      <div class="text">{{ reply.text|linebreaks }}</div>
+                    {% else %}
+                      <div class="files">
+                        {% for file in files %}
+                          <div class="file_block"><a href="{{ file.upload.url }}"><img class="resized" src="{{ file.upload.url }}"></a></div>
+                        {% endfor %}
+                      </div>
+                      <div class="text">{{ reply.text|linebreaks }}</div>
+                    {% endif %}
+                  {% else %}
+                    <div class="text">{{ reply.text|linebreaks }}</div>
+                  {% endif %}
+                  {% if replies_to_reply %}
+                    <div class="replies">
+                      Ответы: 
+                      {% for link, url in replies_to_reply %}
+                        <a href="{{ url }}">{{ link }}</a> 
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              {% endfor %}
+            {% endwith %}
+          {% endfor %}
+        {% endif %}
+<!-- thread end -->
+<hr>
+           <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+          {{ form.as_table }}
+        </table>
+        <button type="submit">Отправить</button>
+      </form>
+    <footer>
+      Сделано на движке neuron
+    </footer>
+        
+</div>
+</body>
+</html>
