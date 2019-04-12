@@ -40,19 +40,34 @@
   <hr>
   {% for op, files in ops_with_files.items %}
     <div class="original_post">
-    <h2>{% if op.subject %}<span class="post_theme">{{ op.subject }}</span> {% endif %}<span class="author">{{ op.author }}</span> <span class="pub_date">{{ op.pub_date|date:"D, d E Y H:i:s" }}</span> <span class="counter">#{{ op.counter }}</span></h2>
+    <h2>
+      {% if op.subject %}
+        <span class="post_theme">{{ op.subject }}</span> 
+      {% endif %}
+      <span class="author">{{ op.author }}</span> 
+      <span class="pub_date">{{ op.pub_date|date:"D, d E Y H:i:s" }}</span> 
+      <span class="counter">#{{ op.counter }}</span>
+    </h2>
     {% if files %}
       {% if files|length == 1 %}
         <div class="files">
         {% for file in files %}
-          <div class="file"><a href="{{ file.upload.url }}"><img class="resized" src="{{ file.upload.url }}"></a></div>
+          <div class="file">
+            <a href="{{ file.upload.url }}">
+              <img class="resized" src="{{ file.upload.url }}">
+            </a>
+          </div>
         {% endfor %}
         </div>
         <div class="text">{{ op.text|linebreaks }}</div>
         {% else %}
           <div class="files">
           {% for file in files %}
-            <div class="file_block"><a href="{{ file.upload.url }}"><img class="resized" src="{{ file.upload.url }}"></a></div>
+            <div class="file_block">
+              <a href="{{ file.upload.url }}">
+                <img class="resized" src="{{ file.upload.url }}">
+              </a>
+            </div>
           {% endfor %}
           </div>
           <div class="text">{{ op.text|linebreaks }}</div>
@@ -64,7 +79,7 @@
       <div class="omitted">Пропущено постов: {{ omitted_counters }}
       <span class="button">
         <a href={% url 'thread' board.url op.counter %}>Перейти к треду</a>
-        </span>
+      </span>
       {% if replies_to_op %}
         <div class="replies">
           Ответы: 
@@ -76,26 +91,40 @@
     </div>
   {% endfor %}
   
-
-{% for id, replies_with_files in replies_sets.items %}
-    {% if replies_with_files %}
-      {% for reply_with_files, replies_to_reply in replies_with_files %}
-        {% for reply, files in reply_with_files.items %}
+  {% if replies_sets %}
+    {% for inthread_counter, reply_with_files, replies_to_reply in replies_sets %}
+      {% for reply, files in reply_with_files.items %}
         <div class="post_wrapper">
           <div class="reply" id="{{ reply.counter }}">
-            <h2>{% if reply.subject %}<span class="post_theme">{{ reply.subject }}</span> {% endif %}<span class="author">{{ reply.author }}</span> <span class="pub_date">{{ reply.pub_date|date:"D, d E Y H:i:s" }}</span> <span class="counter">#{{ reply.counter }}</span></h2>
+            <h2>
+              <span class="post_counter">{{ inthread_counter }}</span> 
+              {% if reply.subject %}
+                <span class="post_theme">{{ reply.subject }}</span> 
+              {% endif %}
+              <span class="author">{{ reply.author }}</span> 
+              <span class="pub_date">{{ reply.pub_date|date:"D, d E Y H:i:s" }}</span> 
+              <span class="counter">#{{ reply.counter }}</span>
+            </h2>
             {% if files %}
               {% if files|length == 1 %}
                 <div class="files">
                   {% for file in files %}
-                    <div class="file"><a href="{{ file.upload.url }}"><img class="resized" src="{{ file.upload.url }}"></a></div>
+                    <div class="file">
+                      <a href="{{ file.upload.url }}">
+                        <img class="resized" src="{{ file.upload.url }}">
+                      </a>
+                    </div>
                   {% endfor %}
                 </div>
                 <div class="text">{{ reply.text|linebreaks }}</div>
               {% else %}
                 <div class="files">
                   {% for file in files %}
-                    <div class="file_block"><a href="{{ file.upload.url }}"><img class="resized" src="{{ file.upload.url }}"></a></div>
+                    <div class="file_block">
+                      <a href="{{ file.upload.url }}">
+                        <img class="resized" src="{{ file.upload.url }}">
+                      </a>
+                    </div>
                   {% endfor %}
                 </div>
                 <div class="text">{{ reply.text|linebreaks }}</div>
@@ -113,10 +142,9 @@
             {% endif %}
           </div>
         </div>
-        {% endfor %}
       {% endfor %}
-    {% endif %}
-  {% endfor %}
+    {% endfor %}
+  {% endif %}
 </div>
 <!-- thread end -->
 {% endfor %}

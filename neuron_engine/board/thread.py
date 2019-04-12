@@ -21,6 +21,9 @@ def assemble_thread(board, form, original_post):
     op_with_files[original_post] = op_files
 
     replies = original_post.post_set.all().order_by('id')
+
+    inthread_counter = tuple(range(1, replies.count()+1))
+
     replies_with_files = []
 
     replies_to_reply_sets = []
@@ -41,7 +44,7 @@ def assemble_thread(board, form, original_post):
         reply_with_files[reply] = reply_files
         replies_with_files.append(reply_with_files)
 
-    replies_sets = zip(replies_with_files, replies_to_reply_sets)
+    replies_sets = zip(replies_with_files, replies_to_reply_sets, inthread_counter)
 
     context = {
         'replies_sets': replies_sets,

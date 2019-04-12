@@ -48,7 +48,8 @@ def assemble_threads(ops):
 
         replies_to_op = assemble_replies(
             op.replies_to_thread.all().order_by('id'),
-            op.board, op
+            op.board,
+            op
             )
         replies_to_op_sets.append(replies_to_op)
 
@@ -62,10 +63,12 @@ def assemble_threads(ops):
         omitted_replies = c - 5 if c >= 5 else 0
         omitted_counters.append(omitted_replies)
 
-        replies_with_files = get_files(last_replies)
+        inthread_counter = list(range(omitted_replies+1, c+1))
 
-        replies = {}
-        replies[op.id] = replies_with_files
+        replies_with_files, replies_to_reply_sets = get_files(last_replies)
+
+        replies = zip(inthread_counter, replies_with_files, replies_to_reply_sets)
+        #replies[inthread_counter] = replies_with_files
         replies_sets.append(replies)
 
     threads = zip(
@@ -115,4 +118,4 @@ def get_files(last_replies):
         reply_with_files[reply] = reply_files
         replies_with_files.append(reply_with_files)
 
-    return zip(replies_with_files, replies_to_reply_sets)
+    return replies_with_files, replies_to_reply_sets
