@@ -46,7 +46,8 @@
       {% endif %}
       <span class="author">{{ op.author }}</span> 
       <span class="pub_date">{{ op.pub_date|date:"D, d E Y H:i:s" }}</span> 
-      <span class="counter">#{{ op.counter }}</span>
+      <span class="counter">#{{ op.counter }}</span> 
+      <a href={% url 'thread' board.url op.counter %}>[ Перейти к треду ]</a>
     </h2>
     {% if files %}
       {% if files|length == 1 %}
@@ -75,20 +76,28 @@
     {% else %}
       <div class="text">{{ op.text|linebreaks }}</div>
     {% endif %}
+    {% if replies_to_op|length == 1 %}
+      <div class="replies">
+        Ответ: 
+        {% autoescape off %}
+        {{ replies_to_op|join:", " }}
+        {% endautoescape %}
+      </div>
+    {% elif replies_to_op|length > 1 %}
+      <div class="replies">
+        Ответы: 
+        {% autoescape off %}
+        {{ replies_to_op|join:", " }}
+        {% endautoescape %}
+      </div>
+    {% else %}
+    {% endif %}
     </div>
-      <div class="omitted">Пропущено постов: {{ omitted_counters }}
-      <span class="button">
-        <a href={% url 'thread' board.url op.counter %}>Перейти к треду</a>
-      </span>
-      {% if replies_to_op %}
-        <div class="replies">
-          Ответы: 
-          {% for link, url in replies_to_op %}
-            <a href="{{ url }}">{{ link }}</a> 
-          {% endfor %}
+      {% if omitted_counters > 0 %}
+        <div class="omitted">
+          Пропущено постов: {{ omitted_counters }}
         </div>
       {% endif %}
-    </div>
   {% endfor %}
   
   {% if replies_sets %}
@@ -132,13 +141,21 @@
             {% else %}
               <div class="text">{{ reply.text|linebreaks }}</div>
             {% endif %}
-            {% if replies_to_reply %}
+            {% if replies_to_reply|length == 1 %}
+              <div class="replies">
+                Ответ: 
+                {% autoescape off %}
+                {{ replies_to_reply|join:", " }}
+                {% endautoescape %}
+              </div>
+            {% elif replies_to_reply|length > 1 %}
               <div class="replies">
                 Ответы: 
-                {% for link, url in replies_to_reply %}
-                  <a href="{{ url }}">{{ link }}</a> 
-                {% endfor %}
+                {% autoescape off %}
+                {{ replies_to_reply|join:", " }}
+                {% endautoescape %}
               </div>
+            {% else %}
             {% endif %}
           </div>
         </div>

@@ -30,7 +30,7 @@
 <!-- thread start -->
       <div class="thread">
         {% for op, files in op_with_files.items %}
-          <div class="op">
+          <div class="original_post">
             <h2>
               {% if op.subject %}
                 <span class="post_theme">{{ op.subject }}</span> 
@@ -66,13 +66,21 @@
             {% else %}
               <div class="text">{{ op.text|linebreaks }}</div>
             {% endif %}
-            {% if replies_to_op %}
+            {% if replies_to_op|length == 1 %}
+              <div class="replies">
+                Ответ: 
+                {% autoescape off %}
+                {{ replies_to_op|join:", " }}
+                {% endautoescape %}
+              </div>
+            {% elif replies_to_op|length > 1 %}
               <div class="replies">
                 Ответы: 
-                {% for link, url in replies_to_op %}
-                  <a href="{{ url }}">{{ link }}</a> 
-                {% endfor %}
+                {% autoescape off %}
+                {{ replies_to_op|join:", " }}
+                {% endautoescape %}
               </div>
+            {% else %}
             {% endif %}
           </div>
         {% endfor %}
@@ -118,13 +126,21 @@
                   {% else %}
                     <div class="text">{{ reply.text|linebreaks }}</div>
                   {% endif %}
-                  {% if replies_to_reply %}
+                  {% if replies_to_reply|length == 1 %}
+                    <div class="replies">
+                      Ответ: 
+                      {% autoescape off %}
+                      {{ replies_to_reply|join:", " }}
+                      {% endautoescape %}
+                    </div>
+                  {% elif replies_to_reply|length > 1 %}
                     <div class="replies">
                       Ответы: 
-                      {% for link, url in replies_to_reply %}
-                        <a href="{{ url }}">{{ link }}</a> 
-                      {% endfor %}
+                      {% autoescape off %}
+                      {{ replies_to_reply|join:", " }}
+                      {% endautoescape %}
                     </div>
+                  {% else %}
                   {% endif %}
                 </div>
               </div>

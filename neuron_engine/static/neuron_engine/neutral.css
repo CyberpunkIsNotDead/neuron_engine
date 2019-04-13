@@ -53,8 +53,8 @@ font-weight: bold;
 }
 
 .thread {
-/*padding: 5px 0px;
-margin: auto;
+overflow: auto;
+/*margin: auto;
 max-width: 1200px; */
 }
 
@@ -91,12 +91,12 @@ font-size: small;
 .original_post {
 /* background-color: #444466; */
 color: white;
-/*margin: 7px 18px;*/
-padding: 0 14px;
+/*margin: 0 7px 0 0;*/
+padding: 0 14px 14px;
 position: relative;
 text-align: left;
 /*border: 1px solid #aaaaaa;*/
-overflow: auto;
+/*overflow: auto;*/
 }
 
 .omitted {
@@ -111,6 +111,7 @@ padding: 5px 5px;
 border: 1px solid #aaaaaa;
 text-shadow: none;
 margin: 0 10px;
+box-shadow: 0px 0px 3px #1f1f1f;
 }
 
 .button a:hover, a:active {
@@ -134,14 +135,18 @@ position: relative;
 text-align: left;
 border: 1px solid #aaaaaa;
 overflow: auto;
-box-shadow: 0px 0px 3px #1f1f1f;
+box-shadow: 0px 0px 4px #1f1f1f;
+}
+
+.files {
+
 }
 
 .file {
 width: 200px;
 height: 200px;
 float: left;
-margin: 0 10px 10px 0;
+margin: 0 25px 16px 0;
 }
 
 .file_block {
@@ -154,7 +159,8 @@ display: inline;
 width: 200px;
 height: 200px;
 object-fit: contain;
-border: 1px dashed #aaaaaa;
+/*border: 1px dashed #aaaaaa;*/
+-webkit-filter: drop-shadow(3px 3px 7px #1f1f1f);
 }
 
 .text {
