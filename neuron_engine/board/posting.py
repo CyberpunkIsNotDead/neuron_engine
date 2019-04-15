@@ -7,6 +7,7 @@ from ..models import OriginalPost, Post, Upload
 
 from .markup import *
 from .misc import *
+from .thumbnail import *
 
 import os
 
@@ -72,14 +73,20 @@ def create_post(board, original_post, form): # form(request.POST, request.FILES)
 
             upl_path = os.path.join(board.url, upload.name)
             save_path = os.path.join(settings.MEDIA_ROOT, upl_path)
+
             path = default_storage.save(save_path, upload)
+            path = '/'.join(path.split('/')[-2:]) #todo: os-independent path
+
+            thumb = create_thumbnail(board, upload)
 
             upl = Upload(
                 board=board,
                 thread=original_post,
                 reply=reply,
-                upload=upl_path
+                upload=path,
+                thumbnail=thumb,
                 )
+
             upl.save()
     else:
         return HttpResponse('form error')
@@ -135,20 +142,24 @@ def create_thread(board, form): # form(request.POST, request.FILES)
                     ).update(child_thread=op)
 
         upload = form.cleaned_data['upload']
-        print(upload)
 
         if upload:
 
             upl_path = os.path.join(board.url, upload.name)
             save_path = os.path.join(settings.MEDIA_ROOT, upl_path)
+
             path = default_storage.save(save_path, upload)
+            path = '/'.join(path.split('/')[-2:]) #todo: os-independent path
+
+            thumb = create_thumbnail(board, upload)
 
             upl = Upload(
                 board=board,
                 thread=op,
-                upload=upl_path
+                upload=path,
+                thumbnail=thumb,
                 )
-            print(upl)
+
             upl.save()
     else:
         return HttpResponse('form error')

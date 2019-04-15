@@ -4,11 +4,19 @@
   {% if files|length == 1 %}
     <div class="files">
       {% for file in files %}
-        <div class="file">
-          <a href="{{ file.upload.url }}">
-            <img class="resized" src="{{ file.upload.url }}">
-          </a>
-        </div>
+        {% if file.thumbnail %}
+          <div class="file">
+            <a href="{{ file.upload.url }}">
+              <img class="thumbnail" src="{{ file.thumbnail.url }}">
+            </a>
+          </div>
+        {% else %}
+          <div class="file">
+            <a href="{{ file.upload.url }}">
+              <img class="resized" src="{{ file.upload.url }}">
+            </a>
+          </div>
+        {% endif %}
       {% endfor %}
     </div>
     <div class="text">{{ post.text|linebreaks }}</div>
