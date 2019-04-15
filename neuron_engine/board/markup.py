@@ -13,6 +13,7 @@ wakaba_mark = [
     (r'(\*\*)([\s\S]*?)(\*\*)', r'<strong>\2</strong>'),
     (r'(__)([\s\S]*?)(__)', r'<em>\2</em>'),
     (r'(\^\^)([\s\S]*?)(\^\^)', r'<del>\2</del>'),
+    (r'(https?:\/\/(www\.)?[-\w\d@:%._\+~#=]{2,256}\.[\w]{2,6}\b([-\w\d@:%_\+.~#?&//=]*))', r'<a href="\1">\1</a>'),
 ]
 
 def markup_text(board, markup_list, text):
