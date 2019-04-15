@@ -1,0 +1,45 @@
+{# included in board.html, thread.html #}
+
+{% if files %}
+  {% if files|length == 1 %}
+    <div class="files">
+      {% for file in files %}
+        <div class="file">
+          <a href="{{ file.upload.url }}">
+            <img class="resized" src="{{ file.upload.url }}">
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="text">{{ reply.text|linebreaks }}</div>
+  {% else %}
+    <div class="files">
+      {% for file in files %}
+        <div class="file_block">
+          <a href="{{ file.upload.url }}">
+            <img class="resized" src="{{ file.upload.url }}">
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="text">{{ reply.text|linebreaks }}</div>
+  {% endif %}
+{% else %}
+  <div class="text">{{ reply.text|linebreaks }}</div>
+{% endif %}
+{% if replies_to_reply|length == 1 %}
+  <div class="replies">
+    Ответ:
+    {% autoescape off %}
+    {{ replies_to_reply|join:", " }}
+    {% endautoescape %}
+  </div>
+{% elif replies_to_reply|length > 1 %}
+  <div class="replies">
+    Ответы:
+    {% autoescape off %}
+    {{ replies_to_reply|join:", " }}
+    {% endautoescape %}
+  </div>
+{% else %}
+{% endif %}

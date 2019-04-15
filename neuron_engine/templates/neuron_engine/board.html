@@ -11,7 +11,7 @@
     <header>
       <div class="navigation">
         <a href={% url 'main_page' %}><div class="return" >←</div></a>
-        Доски: 
+        Доски:
         {% for board in boards %}
           <a href={% url 'board' board.url %}>{{ board.name }}</a> |
         {% endfor %}
@@ -23,100 +23,27 @@
         {% endfor %}
       </div>
     </header>
-        
+
 <div class="page">
   <h1>{{ board.name }}</h1>
-  <div class="form_wrapper">
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <table class="input_form" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td>
-            <div style="margin: 0 12px 0 0">
-              {{ form.author }}
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div style="margin: 0 12px 0 0">
-              {{ form.subject }}
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            {{ form.text }}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            {{ form.upload }}
-          </td>
-        </tr>
-      </table>
-      <button class="form_submit" type="submit">Отправить</button>
-    </form>
-  </div>       
-      
+  {% include 'neuron_engine/form.html' %}
+
 {% for ops_with_files, omitted_counters, replies_sets, replies_to_op in threads %}
-<!-- thread start -->    
+<!-- thread start -->
 <div class="thread">
   <hr>
   {% for op, files in ops_with_files.items %}
     <div class="original_post">
     <h2>
       {% if op.subject %}
-        <span class="post_theme">{{ op.subject }}</span> 
+        <span class="post_theme">{{ op.subject }}</span>
       {% endif %}
-      <span class="author">{{ op.author }}</span> 
-      <span class="pub_date">{{ op.pub_date|date:"D, d E Y H:i:s" }}</span> 
-      <span class="counter">#{{ op.counter }}</span> 
+      <span class="author">{{ op.author }}</span>
+      <span class="pub_date">{{ op.pub_date|date:"D, d E Y H:i:s" }}</span>
+      <span class="counter">#{{ op.counter }}</span>
       <a href={% url 'thread' board.url op.counter %}>[ Перейти к треду ]</a>
     </h2>
-    {% if files %}
-      {% if files|length == 1 %}
-        <div class="files">
-        {% for file in files %}
-          <div class="file">
-            <a href="{{ file.upload.url }}">
-              <img class="resized" src="{{ file.upload.url }}">
-            </a>
-          </div>
-        {% endfor %}
-        </div>
-        <div class="text">{{ op.text|linebreaks }}</div>
-        {% else %}
-          <div class="files">
-          {% for file in files %}
-            <div class="file_block">
-              <a href="{{ file.upload.url }}">
-                <img class="resized" src="{{ file.upload.url }}">
-              </a>
-            </div>
-          {% endfor %}
-          </div>
-          <div class="text">{{ op.text|linebreaks }}</div>
-        {% endif %}
-    {% else %}
-      <div class="text">{{ op.text|linebreaks }}</div>
-    {% endif %}
-    {% if replies_to_op|length == 1 %}
-      <div class="replies">
-        Ответ: 
-        {% autoescape off %}
-        {{ replies_to_op|join:", " }}
-        {% endautoescape %}
-      </div>
-    {% elif replies_to_op|length > 1 %}
-      <div class="replies">
-        Ответы: 
-        {% autoescape off %}
-        {{ replies_to_op|join:", " }}
-        {% endautoescape %}
-      </div>
-    {% else %}
-    {% endif %}
+    {% include 'neuron_engine/op.html' %}
     </div>
       {% if omitted_counters > 0 %}
         <div class="omitted">
@@ -124,64 +51,22 @@
         </div>
       {% endif %}
   {% endfor %}
-  
+
   {% if replies_sets %}
     {% for inthread_counter, reply_with_files, replies_to_reply in replies_sets %}
       {% for reply, files in reply_with_files.items %}
         <div class="post_wrapper">
           <div class="reply" id="{{ reply.counter }}">
             <h2>
-              <span class="post_counter">{{ inthread_counter }}</span> 
+              <span class="post_counter">{{ inthread_counter }}</span>
               {% if reply.subject %}
-                <span class="post_theme">{{ reply.subject }}</span> 
+                <span class="post_theme">{{ reply.subject }}</span>
               {% endif %}
-              <span class="author">{{ reply.author }}</span> 
-              <span class="pub_date">{{ reply.pub_date|date:"D, d E Y H:i:s" }}</span> 
+              <span class="author">{{ reply.author }}</span>
+              <span class="pub_date">{{ reply.pub_date|date:"D, d E Y H:i:s" }}</span>
               <span class="counter">#{{ reply.counter }}</span>
             </h2>
-            {% if files %}
-              {% if files|length == 1 %}
-                <div class="files">
-                  {% for file in files %}
-                    <div class="file">
-                      <a href="{{ file.upload.url }}">
-                        <img class="resized" src="{{ file.upload.url }}">
-                      </a>
-                    </div>
-                  {% endfor %}
-                </div>
-                <div class="text">{{ reply.text|linebreaks }}</div>
-              {% else %}
-                <div class="files">
-                  {% for file in files %}
-                    <div class="file_block">
-                      <a href="{{ file.upload.url }}">
-                        <img class="resized" src="{{ file.upload.url }}">
-                      </a>
-                    </div>
-                  {% endfor %}
-                </div>
-                <div class="text">{{ reply.text|linebreaks }}</div>
-              {% endif %}
-            {% else %}
-              <div class="text">{{ reply.text|linebreaks }}</div>
-            {% endif %}
-            {% if replies_to_reply|length == 1 %}
-              <div class="replies">
-                Ответ: 
-                {% autoescape off %}
-                {{ replies_to_reply|join:", " }}
-                {% endautoescape %}
-              </div>
-            {% elif replies_to_reply|length > 1 %}
-              <div class="replies">
-                Ответы: 
-                {% autoescape off %}
-                {{ replies_to_reply|join:", " }}
-                {% endautoescape %}
-              </div>
-            {% else %}
-            {% endif %}
+            {% include 'neuron_engine/post.html' %}
           </div>
         </div>
       {% endfor %}
@@ -191,42 +76,11 @@
 <!-- thread end -->
 {% endfor %}
 <hr>
-  <div class="form_wrapper">
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <table class="input_form" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td>
-            <div style="margin: 0 12px 0 0">
-              {{ form.author }}
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div style="margin: 0 12px 0 0">
-              {{ form.subject }}
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            {{ form.text }}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            {{ form.upload }}
-          </td>
-        </tr>
-      </table>
-      <button class="form_submit" type="submit">Отправить</button>
-    </form>
-  </div>   
+  {% include 'neuron_engine/form.html' %}
     <footer>
       Сделано на движке neuron
     </footer>
 </div>
-        
+
   </body>
 </html>
