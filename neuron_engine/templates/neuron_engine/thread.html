@@ -35,33 +35,33 @@
       <hr>
 <!-- thread start -->
       <div class="thread">
-        {% for op, files in op_with_files.items %}
+        {% for post, files in op_with_files.items %}
           <div class="original_post">
             <h2>
-              {% if op.subject %}
-                <span class="post_theme">{{ op.subject }}</span>
+              {% if post.subject %}
+                <span class="post_theme">{{ post.subject }}</span>
               {% endif %}
-              <span class="author">{{ op.author }}</span>
-              <span class="pub_date">{{ op.pub_date|date:"D, d E Y H:i:s" }}</span>
-              <span class="counter">#{{ op.counter }}</span>
+              <span class="author">{{ post.author }}</span>
+              <span class="pub_date">{{ post.pub_date|date:"D, d E Y H:i:s" }}</span>
+              <span class="counter">#{{ post.counter }}</span>
             </h2>
-            {% include 'neuron_engine/op.html' %}
+            {% include 'neuron_engine/post.html' %}
           </div>
         {% endfor %}
         {% if replies_sets %}
-          {% for reply_with_files, replies_to_reply, inthread_counter in replies_sets %}
-              {% for reply, files in reply_with_files.items %}
+          {% for reply_with_files, replies_to_post, inthread_counter in replies_sets %}
+              {% for post, files in reply_with_files.items %}
               <div class="post_wrapper">
-                <div class="reply" id="{{ reply.counter }}">
+                <div class="reply" id="{{ post.counter }}">
                   <h2>
                       <span class="post_counter">{{ inthread_counter }}</span>
-                    {% if reply.subject %}
-                      <span class="post_theme">{{ reply.subject }}</span>
+                    {% if post.subject %}
+                      <span class="post_theme">{{ post.subject }}</span>
                     {% endif %}
-                    <span class="author">{{ reply.author }}</span>
-                    <span class="pub_date">{{ reply.pub_date|date:"D, d E Y H:i:s" }}</span>
-                    <span class="counter">#{{ reply.counter }}</span>
-                    <a href="#{{ reply.counter }}">[Ссылка]</a>
+                    <span class="author">{{ post.author }}</span>
+                    <span class="pub_date">{{ post.pub_date|date:"D, d E Y H:i:s" }}</span>
+                    <span class="counter">#{{ post.counter }}</span>
+                    <a href="#{{ post.counter }}">[Ссылка]</a>
                   </h2>
                   {% include 'neuron_engine/post.html' %}
                 </div>

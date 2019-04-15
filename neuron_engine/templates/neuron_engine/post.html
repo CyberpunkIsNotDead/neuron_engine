@@ -11,7 +11,7 @@
         </div>
       {% endfor %}
     </div>
-    <div class="text">{{ reply.text|linebreaks }}</div>
+    <div class="text">{{ post.text|linebreaks }}</div>
   {% else %}
     <div class="files">
       {% for file in files %}
@@ -22,23 +22,23 @@
         </div>
       {% endfor %}
     </div>
-    <div class="text">{{ reply.text|linebreaks }}</div>
+    <div class="text">{{ post.text|linebreaks }}</div>
   {% endif %}
 {% else %}
-  <div class="text">{{ reply.text|linebreaks }}</div>
+  <div class="text">{{ post.text|linebreaks }}</div>
 {% endif %}
-{% if replies_to_reply|length == 1 %}
+{% if replies_to_post|length == 1 %}
   <div class="replies">
     Ответ:
     {% autoescape off %}
-    {{ replies_to_reply|join:", " }}
+    {{ replies_to_post|join:", " }}
     {% endautoescape %}
   </div>
-{% elif replies_to_reply|length > 1 %}
+{% elif replies_to_post|length > 1 %}
   <div class="replies">
     Ответы:
     {% autoescape off %}
-    {{ replies_to_reply|join:", " }}
+    {{ replies_to_post|join:", " }}
     {% endautoescape %}
   </div>
 {% else %}

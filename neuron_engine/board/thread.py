@@ -50,7 +50,7 @@ def assemble_thread(board, form, original_post):
         'replies_sets': replies_sets,
         'original_post': original_post,
         'op_with_files': op_with_files,
-        'replies_to_op': replies_to_op,
+        'replies_to_post': replies_to_op,
         'board': board,
         'boards': boards,
         'form': form,
