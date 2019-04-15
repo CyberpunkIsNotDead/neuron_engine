@@ -38,6 +38,7 @@ def assemble_board_page(request, board, form):
 
 def assemble_threads(ops):
 
+    file_counts = []
     ops_with_files = []
     omitted_counters = []
     replies_sets = []
@@ -53,10 +54,11 @@ def assemble_threads(ops):
             )
         replies_to_op_sets.append(replies_to_op)
 
-        op_files = Upload.objects.filter(reply=None, thread=op.id)
+        file_count, op_files = get_file_info(Upload.objects.filter(reply=None, thread=op.id))
         op_with_files = {}
         op_with_files[op] = op_files
         ops_with_files.append(op_with_files)
+        file_counts.append(file_count)
         last_replies = op.post_set.all().order_by('-id')[:5][::-1]
 
         c = op.post_set.all().count()
@@ -65,13 +67,14 @@ def assemble_threads(ops):
 
         inthread_counter = list(range(omitted_replies+1, c+1))
 
-        replies_with_files, replies_to_reply_sets = get_files(last_replies)
+        fcs, replies_with_files, replies_to_reply_sets = get_files(last_replies)
 
-        replies = zip(inthread_counter, replies_with_files, replies_to_reply_sets)
+        replies = zip(inthread_counter, fcs, replies_with_files, replies_to_reply_sets)
         #replies[inthread_counter] = replies_with_files
         replies_sets.append(replies)
 
     threads = zip(
+        file_counts,
         ops_with_files,
         omitted_counters,
         replies_sets,
@@ -100,6 +103,7 @@ def make_pagination(current_page, pages_count):
 
 def get_files(last_replies):
 
+    file_counts = []
     replies_with_files = []
     replies_to_reply_sets = []
 
@@ -113,9 +117,10 @@ def get_files(last_replies):
             )
         replies_to_reply_sets.append(replies_to_reply)
 
-        reply_files = Upload.objects.filter(reply=reply.id)
+        file_count, reply_files = get_file_info(Upload.objects.filter(reply=reply.id))
         reply_with_files = {}
         reply_with_files[reply] = reply_files
         replies_with_files.append(reply_with_files)
+        file_counts.append(file_count)
 
-    return replies_with_files, replies_to_reply_sets
+    return file_counts, replies_with_files, replies_to_reply_sets

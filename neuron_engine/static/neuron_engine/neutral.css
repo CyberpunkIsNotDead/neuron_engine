@@ -151,6 +151,12 @@ margin: 0 25px 16px 0;
 display: inline;
 }
 
+.file_info {
+margin: 0 0 5px 0;
+color: #bfbfbf;
+font-size: small;
+}
+
 .resized {
 width: 200px;
 height: 200px;

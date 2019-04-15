@@ -1,16 +1,28 @@
 {# included in board.html, thread.html #}
 
 {% if files %}
-  {% if files|length == 1 %}
+  {% if file_counter == 1 %}
     <div class="files">
-      {% for file in files %}
+      {% for file, name, size in files %}
         {% if file.thumbnail %}
+          <div class="file_info">
+            {{ size|filesizeformat }},
+            {% for n in name %}
+              {{ n }}
+            {% endfor %}
+          </div>
           <div class="file">
             <a href="{{ file.upload.url }}">
               <img class="thumbnail" src="{{ file.thumbnail.url }}">
             </a>
           </div>
         {% else %}
+          <div class="file_info">
+            {{ size|filesizeformat }},
+            {% for n in name %}
+              {{ n }}
+            {% endfor %}
+          </div>
           <div class="file">
             <a href="{{ file.upload.url }}">
               <img class="resized" src="{{ file.upload.url }}">
@@ -21,9 +33,12 @@
     </div>
     <div class="text">{{ post.text|linebreaks }}</div>
   {% else %}
-    <div class="files">
-      {% for file in files %}
-        <div class="file_block">
+    <div class="file_block">
+      {% for file, name, size in files %}
+        <div class="file_info">
+         {{ size|filesizeformat }}
+        </div>
+        <div class="file">
           <a href="{{ file.upload.url }}">
             <img class="resized" src="{{ file.upload.url }}">
           </a>

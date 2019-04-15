@@ -49,7 +49,7 @@
           </div>
         {% endfor %}
         {% if replies_sets %}
-          {% for reply_with_files, replies_to_post, inthread_counter in replies_sets %}
+          {% for file_count, reply_with_files, replies_to_post, inthread_counter in replies_sets %}
               {% for post, files in reply_with_files.items %}
               <div class="post_wrapper">
                 <div class="reply" id="{{ post.counter }}">

@@ -16,11 +16,13 @@ def assemble_thread(board, form, original_post):
         original_post
         )
 
-    op_files = Upload.objects.filter(reply=None, thread=original_post.id)
+    op_file_counter, op_files = get_file_info(Upload.objects.filter(reply=None, thread=original_post.id))
     op_with_files = {}
     op_with_files[original_post] = op_files
 
     replies = original_post.post_set.all().order_by('id')
+
+    post_file_counters = []
 
     inthread_counter = tuple(range(1, replies.count()+1))
 
@@ -39,14 +41,16 @@ def assemble_thread(board, form, original_post):
             )
         replies_to_reply_sets.append(replies_to_reply)
 
-        reply_files = Upload.objects.filter(reply=reply.id)
+        post_file_counter, reply_files = get_file_info(Upload.objects.filter(reply=reply.id))
+        post_file_counters.append(post_file_counter)
         reply_with_files = {}
         reply_with_files[reply] = reply_files
         replies_with_files.append(reply_with_files)
 
-    replies_sets = zip(replies_with_files, replies_to_reply_sets, inthread_counter)
+    replies_sets = zip(post_file_counters, replies_with_files, replies_to_reply_sets, inthread_counter)
 
     context = {
+        'file_counter': op_file_counter,
         'replies_sets': replies_sets,
         'original_post': original_post,
         'op_with_files': op_with_files,

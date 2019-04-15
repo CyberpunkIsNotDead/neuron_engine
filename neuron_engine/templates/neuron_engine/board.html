@@ -28,7 +28,7 @@
   <h1>{{ board.name }}</h1>
   {% include 'neuron_engine/form.html' %}
 
-{% for ops_with_files, omitted_counters, replies_sets, replies_to_post in threads %}
+{% for file_counter, ops_with_files, omitted_counters, replies_sets, replies_to_post in threads %}
 <!-- thread start -->
 <div class="thread">
   <hr>
@@ -53,7 +53,7 @@
   {% endfor %}
 
   {% if replies_sets %}
-    {% for inthread_counter, reply_with_files, replies_to_post in replies_sets %}
+    {% for inthread_counter, file_counter, reply_with_files, replies_to_post in replies_sets %}
       {% for post, files in reply_with_files.items %}
         <div class="post_wrapper">
           <div class="reply" id="{{ post.counter }}">
