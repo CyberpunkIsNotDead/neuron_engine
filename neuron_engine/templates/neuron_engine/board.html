@@ -26,13 +26,38 @@
         
 <div class="page">
   <h1>{{ board.name }}</h1>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-      <table>
-      {{ form.as_table }}
+  <div class="form_wrapper">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <table class="input_form" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <div style="margin: 0 12px 0 0">
+              {{ form.author }}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div style="margin: 0 12px 0 0">
+              {{ form.subject }}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.text }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.upload }}
+          </td>
+        </tr>
       </table>
-    <button type="submit">Отправить</button>
-  </form>       
+      <button class="form_submit" type="submit">Отправить</button>
+    </form>
+  </div>       
       
 {% for ops_with_files, omitted_counters, replies_sets, replies_to_op in threads %}
 <!-- thread start -->    
@@ -166,13 +191,38 @@
 <!-- thread end -->
 {% endfor %}
 <hr>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-      <table>
-      {{ form.as_table }}
+  <div class="form_wrapper">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <table class="input_form" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <div style="margin: 0 12px 0 0">
+              {{ form.author }}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div style="margin: 0 12px 0 0">
+              {{ form.subject }}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.text }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.upload }}
+          </td>
+        </tr>
       </table>
-    <button type="submit">Отправить</button>
-  </form>
+      <button class="form_submit" type="submit">Отправить</button>
+    </form>
+  </div>   
     <footer>
       Сделано на движке neuron
     </footer>

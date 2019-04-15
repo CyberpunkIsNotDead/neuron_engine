@@ -184,6 +184,7 @@ color: white;
 h1 {
 color: white;
 text-align: center;
+text-shadow: 0px 0px 10px #1f1f1f;
 }
 
 h2 {
@@ -221,16 +222,50 @@ margin: 50px 0 10px 0;
 text-align: center;
 }
 
+.form_wrapper {
+display: flex;
+justify-content: center;
+}
+
 form {
 color: white;
-background-color: #434363;
-width: 450px;
+/*background-color: #434363;*/
+display: inline-block;
 margin: auto;
-padding: 7px 7px;
-border: 1px solid #aaaaaa;
+/*border: 1px solid #aaaaaa;*/
+border-radius: 6px;
+padding: 5px 5px;
+}
+
+.input_form {
+}
+
+.textinput {
+display: block;
+background-color: #434363;
+border: 1px solid #a1a1a1;
+width: 100%;
+margin: 3px 0 3px 0;
+padding: 5px 5px;
+box-shadow: 0px 0px 4px #1f1f1f;
+}
+
+.textarea {
+display: block;
+background-color: #434363;
+border: 1px solid #a1a1a1;
+width: 600px;
+margin: 3px 0 3px 0;
+padding: 5px 5px;
+box-shadow: 0px 0px 4px #1f1f1f;
+}
+
+.form_submit {
+float: right;
 }
 
 hr {
 color: #a1a1a1;
 margin: 25px 0 16px 0;
+/*box-shadow: 0px 0px 4px #1f1f1f;*/
 }

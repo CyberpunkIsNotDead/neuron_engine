@@ -2,7 +2,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ board.name }} — {{ original_post.subject }}</title>
+    <title>
+      {% if original_post.subject %}
+        {{ board.name }} — {{ original_post.subject }}
+      {% else %}
+        {{ board.name }} — тред
+      {% endif %}
+    </title>
     <link rel="stylesheet" type="text/css" href="{% static 'neuron_engine/neutral.css' %}">
     <meta charset="UTF-8">
   </head>
@@ -18,14 +24,45 @@
       </div>
     </header>
     <div class="page">
-      <h1>{{ board.name }}</h1>
-      <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table>
-          {{ form.as_table }}
-        </table>
-        <button type="submit">Отправить</button>
-      </form>
+      <h1>
+        {% if original_post.subject %}
+          {{ board.name }} — {{ original_post.subject }}
+        {% else %}
+          {{ board.name }} — тред
+        {% endif %}
+      </h1>
+      <div class="form_wrapper">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <table class="input_form" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td>
+                <div style="margin: 0 12px 0 0">
+                  {{ form.author }}
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="margin: 0 12px 0 0">
+                  {{ form.subject }}
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {{ form.text }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {{ form.upload }}
+              </td>
+            </tr>
+          </table>
+          <button class="form_submit" type="submit">Отправить</button>
+        </form>
+      </div>   
       <hr>
 <!-- thread start -->
       <div class="thread">
@@ -149,13 +186,38 @@
         {% endif %}
 <!-- thread end -->
 <hr>
-           <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table>
-          {{ form.as_table }}
-        </table>
-        <button type="submit">Отправить</button>
-      </form>
+  <div class="form_wrapper">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <table class="input_form" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <div style="margin: 0 12px 0 0">
+              {{ form.author }}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div style="margin: 0 12px 0 0">
+              {{ form.subject }}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.text }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.upload }}
+          </td>
+        </tr>
+      </table>
+      <button class="form_submit" type="submit">Отправить</button>
+    </form>
+  </div>   
     <footer>
       Сделано на движке neuron
     </footer>
