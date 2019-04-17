@@ -49,9 +49,10 @@ def board(request, board_url):
 
     elif request.method == "POST":
 
-        form = PostForm(request.POST, request.FILES)
+        uploads = request.FILES.getlist('upload')
+        form = PostForm(request.POST)
 
-        posting.create_thread(board, form)
+        posting.create_thread(board, form, uploads)
 
         context = b.assemble_board_page(request, board, form)
         return render(request, 'neuron_engine/board.html', context)
@@ -85,9 +86,10 @@ def thread(request, board_url, original_post_counter):
 
     elif request.method == "POST":
 
-        form = PostForm(request.POST, request.FILES)
+        uploads = request.FILES.getlist('upload')
+        form = PostForm(request.POST)
 
-        posting.create_post(board, original_post, form)
+        posting.create_post(board, original_post, form, uploads)
 
         context = t.assemble_thread(board, form, original_post)
         return render(request, 'neuron_engine/thread.html', context)

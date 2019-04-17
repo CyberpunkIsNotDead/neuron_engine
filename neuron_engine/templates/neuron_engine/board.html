@@ -8,6 +8,7 @@
   </head>
 
   <body>
+    <script src="{% static 'neuron_engine/jquery-3.4.0.min.js' %}"></script>
     <header>
       <div class="navigation">
         <a href={% url 'main_page' %}><div class="return" >←</div></a>
@@ -78,7 +79,6 @@
 <br>
 {% endfor %}
 <br>
-  {% include 'neuron_engine/form.html' %}
     <footer>
       Сделано на движке neuron
     </footer>

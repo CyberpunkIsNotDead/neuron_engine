@@ -33,19 +33,35 @@
   {% else %}
     <div class="file_block">
       {% for file, name, size in files %}
-        <div class="file_container">
-          <div class="file_info">
-            {{ size|filesizeformat }}
-            {% for n in name %}
-              {{ n }}
-            {% endfor %}
+        {% if file.thumbnail %}
+          <div class="file_container">
+            <div class="file_info">
+              {{ size|filesizeformat }},
+              {% for n in name %}
+                {{ n }}
+              {% endfor %}
+            </div>
+            <div class="file">
+              <a href="{{ file.upload.url }}">
+                <img class="thumbnail" src="{{ file.thumbnail.url }}">
+              </a>
+            </div>
           </div>
-          <div class="file">
-            <a href="{{ file.upload.url }}">
-              <img class="resized" src="{{ file.upload.url }}">
-            </a>
+        {% else %}
+          <div class="file_container">
+            <div class="file_info">
+              {{ size|filesizeformat }},
+              {% for n in name %}
+                {{ n }}
+              {% endfor %}
+            </div>
+            <div class="file">
+              <a href="{{ file.upload.url }}">
+                <img class="resized" src="{{ file.upload.url }}">
+              </a>
+            </div>
           </div>
-        </div>
+        {% endif %}
       {% endfor %}
     </div>
     <div class="text">{{ post.text|linebreaks }}</div>

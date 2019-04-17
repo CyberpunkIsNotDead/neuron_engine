@@ -14,7 +14,7 @@ import os
 ''' posting '''
 
 
-def create_post(board, original_post, form): # form(request.POST, request.FILES)
+def create_post(board, original_post, form, uploads): # form(request.POST, request.FILES)
 
     if form.is_valid():
 
@@ -67,33 +67,33 @@ def create_post(board, original_post, form): # form(request.POST, request.FILES)
 
         original_post.save()
 
-        upload = form.cleaned_data['upload']
+        if uploads:
 
-        if upload:
+            for upload in uploads:
 
-            upl_path = os.path.join(board.url, upload.name)
-            save_path = os.path.join(settings.MEDIA_ROOT, upl_path)
+                upl_path = os.path.join(board.url, upload.name)
+                save_path = os.path.join(settings.MEDIA_ROOT, upl_path)
 
-            path = default_storage.save(save_path, upload)
-            path = '/'.join(path.split('/')[-2:]) #todo: os-independent path
+                path = default_storage.save(save_path, upload)
+                path = '/'.join(path.split('/')[-2:]) #todo: os-independent path
 
-            thumb = create_thumbnail(board, upload)
+                thumb = create_thumbnail(board, upload)
 
-            upl = Upload(
-                board=board,
-                thread=original_post,
-                reply=reply,
-                upload=path,
-                thumbnail=thumb,
-                )
+                upl = Upload(
+                    board=board,
+                    thread=original_post,
+                    reply=reply,
+                    upload=path,
+                    thumbnail=thumb,
+                    )
 
-            upl.save()
+                upl.save()
     else:
         return HttpResponse('form error')
 
 
 
-def create_thread(board, form): # form(request.POST, request.FILES)
+def create_thread(board, form, uploads): # form(request.POST, request.FILES)
 
     if form.is_valid():
 
@@ -141,25 +141,26 @@ def create_thread(board, form): # form(request.POST, request.FILES)
                     id=replies_relation
                     ).update(child_thread=op)
 
-        upload = form.cleaned_data['upload']
 
-        if upload:
+        if uploads:
 
-            upl_path = os.path.join(board.url, upload.name)
-            save_path = os.path.join(settings.MEDIA_ROOT, upl_path)
+            for upload in uploads:
 
-            path = default_storage.save(save_path, upload)
-            path = '/'.join(path.split('/')[-2:]) #todo: os-independent path
+                upl_path = os.path.join(board.url, upload.name)
+                save_path = os.path.join(settings.MEDIA_ROOT, upl_path)
 
-            thumb = create_thumbnail(board, upload)
+                path = default_storage.save(save_path, upload)
+                path = '/'.join(path.split('/')[-2:]) #todo: os-independent path
 
-            upl = Upload(
-                board=board,
-                thread=op,
-                upload=path,
-                thumbnail=thumb,
-                )
+                thumb = create_thumbnail(board, upload)
 
-            upl.save()
+                upl = Upload(
+                    board=board,
+                    thread=op,
+                    upload=path,
+                    thumbnail=thumb,
+                    )
+
+                upl.save()
     else:
         return HttpResponse('form error')

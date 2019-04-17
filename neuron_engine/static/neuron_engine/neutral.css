@@ -151,6 +151,7 @@ display: block;
 margin: 0 0 12px 0;
 color: #bfbfbf;
 font-size: small;
+overflow: hidden;
 }
 
 .file {

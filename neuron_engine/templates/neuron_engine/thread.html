@@ -13,6 +13,7 @@
     <meta charset="UTF-8">
   </head>
   <body>
+    <script src="{% static 'neuron_engine/jquery-3.4.0.min.js' %}"></script>
     <header>
       <div class="navigation">
         <a href={% url 'board' board.url %}><div class="return" >←</div></a>
@@ -51,7 +52,7 @@
           </div>
         {% endfor %}
         {% if replies_sets %}
-          {% for file_count, reply_with_files, replies_to_post, inthread_counter in replies_sets %}
+          {% for file_counter, reply_with_files, replies_to_post, inthread_counter in replies_sets %}
               {% for post, files in reply_with_files.items %}
               <div class="post_wrapper">
                 <div class="reply" id="{{ post.counter }}">
@@ -74,7 +75,6 @@
 <!-- thread end -->
 </div>
 <br>
-  {% include 'neuron_engine/form.html' %}
     <footer>
       Сделано на движке neuron
     </footer>

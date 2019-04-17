@@ -1,5 +1,16 @@
 {# included in board.html, thread.html #}
 
+<script type="text/javascript">
+counter = 2;
+jQuery(function($) {
+  $('form').on('change', 'input[type=file]', function() {
+    var form = $(this).closest('form');
+    form.append('<tr><td><input type="file" name="upload" id="id_upload'+counter+'"><label for="id_upload'+counter+'" class="finput">Выбрать файл</label></td></tr>');
+    counter++;
+  });
+});
+</script>
+
 <div class="form_wrapper">
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
