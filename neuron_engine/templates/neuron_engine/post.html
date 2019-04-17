@@ -2,23 +2,40 @@
 
 {% if files %}
   {% if file_counter == 1 %}
-    <div class="files">
+    {% for file, name, size in files %}
+      {% if file.thumbnail %}
+        <div class="file_info">
+          {{ size|filesizeformat }},
+          {% for n in name %}
+            {{ n }}
+          {% endfor %}
+        </div>
+        <div class="file">
+          <a href="{{ file.upload.url }}">
+            <img class="thumbnail" src="{{ file.thumbnail.url }}">
+          </a>
+        </div>
+      {% else %}
+        <div class="file_info">
+          {{ size|filesizeformat }},
+          {% for n in name %}
+            {{ n }}
+          {% endfor %}
+        </div>
+        <div class="file">
+          <a href="{{ file.upload.url }}">
+            <img class="resized" src="{{ file.upload.url }}">
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+    <div class="text">{{ post.text|linebreaks }}</div>
+  {% else %}
+    <div class="file_block">
       {% for file, name, size in files %}
-        {% if file.thumbnail %}
+        <div class="file_container">
           <div class="file_info">
-            {{ size|filesizeformat }},
-            {% for n in name %}
-              {{ n }}
-            {% endfor %}
-          </div>
-          <div class="file">
-            <a href="{{ file.upload.url }}">
-              <img class="thumbnail" src="{{ file.thumbnail.url }}">
-            </a>
-          </div>
-        {% else %}
-          <div class="file_info">
-            {{ size|filesizeformat }},
+            {{ size|filesizeformat }}
             {% for n in name %}
               {{ n }}
             {% endfor %}
@@ -28,20 +45,6 @@
               <img class="resized" src="{{ file.upload.url }}">
             </a>
           </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-    <div class="text">{{ post.text|linebreaks }}</div>
-  {% else %}
-    <div class="file_block">
-      {% for file, name, size in files %}
-        <div class="file_info">
-         {{ size|filesizeformat }}
-        </div>
-        <div class="file">
-          <a href="{{ file.upload.url }}">
-            <img class="resized" src="{{ file.upload.url }}">
-          </a>
         </div>
       {% endfor %}
     </div>

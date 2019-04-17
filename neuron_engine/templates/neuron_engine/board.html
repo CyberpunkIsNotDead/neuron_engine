@@ -27,11 +27,10 @@
 <div class="page">
   <h1>{{ board.name }}</h1>
   {% include 'neuron_engine/form.html' %}
-
+<br>
 {% for file_counter, ops_with_files, omitted_counters, replies_sets, replies_to_post in threads %}
 <!-- thread start -->
 <div class="thread">
-  <br>
   {% for post, files in ops_with_files.items %}
     <div class="post_wrapper">
       <div class="original_post">
@@ -76,6 +75,7 @@
   {% endif %}
 </div>
 <!-- thread end -->
+<br>
 {% endfor %}
 <br>
   {% include 'neuron_engine/form.html' %}

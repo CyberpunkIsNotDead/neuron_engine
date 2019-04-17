@@ -54,7 +54,7 @@ font-weight: bold;
 }
 
 .thread {
-overflow: auto;
+
 }
 
 .counter {
@@ -90,7 +90,6 @@ font-size: small;
 display: table;
 background-color: #5a5676;
 color: white;
-margin: 0 0 10px 0;
 padding: 10px 14px;
 position: relative;
 text-align: left;
@@ -102,7 +101,7 @@ z-index: 1;
 
 .omitted {
 color: #d3d3d3;
-margin: 0 0 16px 40px;
+margin: 10px 0 10px 20px;
 }
 
 .button a:link, a:visited {
@@ -122,6 +121,7 @@ box-shadow: 0px 0px 3px white;
 }
 
 .post_wrapper {
+display: block table;
 padding: 5px 5px;
 }
 
@@ -136,23 +136,27 @@ text-align: left;
 box-shadow: 0px 0px 4px #1f1f1f;
 }
 
-.files {
-
-}
-
-.file {
-float: left;
-margin: 0 25px 16px 0;
-}
-
 .file_block {
-display: inline;
+display: table;
+}
+
+.file_container {
+display: table-cell;
+float: left;
+width: 220px;
 }
 
 .file_info {
+display: block;
 margin: 0 0 12px 0;
 color: #bfbfbf;
 font-size: small;
+}
+
+.file {
+display: block;
+float: left;
+margin: 0 25px 16px 0;
 }
 
 .resized {
@@ -175,13 +179,12 @@ color: #b5dcb5;
 }
 
 .spoiler {
-background-color: black;
-color: black;
+background-color: #282333;
+color: #282333;
 }
 
 .spoiler:hover {
-background-color: transparent;
-color: white;
+color: #dadada;
 }
 
 h1 {
@@ -194,6 +197,7 @@ h2 {
 font-size: small;
 color: #ffa8a8;
 font-weight: normal;
+margin: 0 0 5px 0;
 }
 
 a:link, a:visited {
