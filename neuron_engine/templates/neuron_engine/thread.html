@@ -32,20 +32,22 @@
         {% endif %}
       </h1>
       {% include 'neuron_engine/form.html' %}
-      <hr>
+      <br>
 <!-- thread start -->
       <div class="thread">
         {% for post, files in op_with_files.items %}
-          <div class="original_post">
-            <h2>
-              {% if post.subject %}
-                <span class="post_theme">{{ post.subject }}</span>
-              {% endif %}
-              <span class="author">{{ post.author }}</span>
-              <span class="pub_date">{{ post.pub_date|date:"D, d E Y H:i:s" }}</span>
-              <span class="counter">#{{ post.counter }}</span>
-            </h2>
-            {% include 'neuron_engine/post.html' %}
+          <div class="post_wrapper">
+            <div class="original_post">
+              <h2>
+                {% if post.subject %}
+                  <span class="post_theme">{{ post.subject }}</span>
+                {% endif %}
+                <span class="author">{{ post.author }}</span>
+                <span class="pub_date">{{ post.pub_date|date:"D, d E Y H:i:s" }}</span>
+                <span class="counter">#{{ post.counter }}</span>
+              </h2>
+              {% include 'neuron_engine/post.html' %}
+            </div>
           </div>
         {% endfor %}
         {% if replies_sets %}
@@ -70,7 +72,7 @@
           {% endfor %}
         {% endif %}
 <!-- thread end -->
-<hr>
+<br>
   {% include 'neuron_engine/form.html' %}
     <footer>
       Сделано на движке neuron

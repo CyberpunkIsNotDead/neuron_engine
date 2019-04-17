@@ -22,12 +22,10 @@ def assemble_thread(board, form, original_post):
 
     replies = original_post.post_set.all().order_by('id')
 
-    post_file_counters = []
-
     inthread_counter = tuple(range(1, replies.count()+1))
 
+    post_file_counters = []
     replies_with_files = []
-
     replies_to_reply_sets = []
 
     for reply in replies:

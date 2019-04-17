@@ -44,7 +44,7 @@ def post_counter(board):
 ''' getting file info '''
 
 def get_file_info(rows):
-    #rows = Upload.objects.filter(reply=post_id)
+
     filenames = []
     filesize = []
     length = 0
@@ -53,6 +53,5 @@ def get_file_info(rows):
         filenames.append(r.upload.name.split('/')[-1:])
         filesize.append(r.upload.size)
         length += 1
-    print(length, rows, filenames, filesize)
-    
+
     return length, zip(rows, filenames, filesize)

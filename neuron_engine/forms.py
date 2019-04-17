@@ -4,7 +4,7 @@ from .models import OriginalPost, Post, Upload
 
 
 class PostForm(forms.Form):
-    
+
     author = forms.CharField(
         max_length=100,
         required=False,
