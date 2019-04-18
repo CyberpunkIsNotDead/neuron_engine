@@ -45,13 +45,22 @@ def post_counter(board):
 
 def get_file_info(rows):
 
-    filenames = []
+    short_filenames = []
+    full_filenames = []
     filesize = []
     length = 0
 
     for r in rows:
-        filenames.append(r.upload.name.split('/')[-1:])
+        n = str((r.upload.name.split('/')[-1:])[0])
+        full_filenames.append(n)
+        print(n)
+        if len(n) > 20:
+            n = n[:8] + '...' + n[-8:]
+            print(n)
+            short_filenames.append(n)
+        else:
+            short_filenames.append(n)
         filesize.append(r.upload.size)
         length += 1
 
-    return length, zip(rows, filenames, filesize)
+    return length, zip(rows, short_filenames, full_filenames, filesize)

@@ -2,27 +2,23 @@
 
 {% if files %}
   {% if file_counter == 1 %}
-    {% for file, name, size in files %}
+    {% for file, short_name, full_name, size in files %}
       {% if file.thumbnail %}
-        <div class="file_info">
+        <div class="single_file_info">
           {{ size|filesizeformat }},
-          {% for n in name %}
-            {{ n }}
-          {% endfor %}
+          {{ full_name }}
         </div>
-        <div class="file">
+        <div class="single_pic">
           <a href="{{ file.upload.url }}">
             <img class="thumbnail" src="{{ file.thumbnail.url }}">
           </a>
         </div>
       {% else %}
-        <div class="file_info">
+        <div class="single_file_info">
           {{ size|filesizeformat }},
-          {% for n in name %}
-            {{ n }}
-          {% endfor %}
+          {{ full_name }}
         </div>
-        <div class="file">
+        <div class="single_pic">
           <a href="{{ file.upload.url }}">
             <img class="resized" src="{{ file.upload.url }}">
           </a>
@@ -32,33 +28,33 @@
     <div class="text">{{ post.text|linebreaks }}</div>
   {% else %}
     <div class="file_block">
-      {% for file, name, size in files %}
+      {% for file, short_name, full_name, size in files %}
         {% if file.thumbnail %}
-          <div class="file_container">
-            <div class="file_info">
+          <div class="multiple_file_container">
+            <div class="multiple_file_info">
               {{ size|filesizeformat }},
-              {% for n in name %}
-                {{ n }}
-              {% endfor %}
+              {{ short_name }}
             </div>
-            <div class="file">
-              <a href="{{ file.upload.url }}">
-                <img class="thumbnail" src="{{ file.thumbnail.url }}">
-              </a>
+            <div class="multiple_pic_wrapper">
+              <div class="multiple_pic">
+                <a href="{{ file.upload.url }}">
+                  <img class="thumbnail" src="{{ file.thumbnail.url }}">
+                </a>
+              </div>
             </div>
           </div>
         {% else %}
-          <div class="file_container">
-            <div class="file_info">
+          <div class="multiple_file_container">
+            <div class="multiple_file_info">
               {{ size|filesizeformat }},
-              {% for n in name %}
-                {{ n }}
-              {% endfor %}
+              {{ short_name }}
             </div>
-            <div class="file">
-              <a href="{{ file.upload.url }}">
-                <img class="resized" src="{{ file.upload.url }}">
-              </a>
+            <div class="multiple_pic_wrapper">
+              <div class="multiple_pic">
+                <a href="{{ file.upload.url }}">
+                  <img class="resized" src="{{ file.upload.url }}">
+                </a>
+              </div>
             </div>
           </div>
         {% endif %}
