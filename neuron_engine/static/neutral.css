@@ -201,15 +201,18 @@ left: 50%;
 transform: translate(-50%, -50%);
 }
 
-.resized {
-width: 200px;
-height: 200px;
-object-fit: contain;
+.thumbnail {
 -webkit-filter: drop-shadow(0px 0px 6px #151535);
 }
 
-.thumbnail {
--webkit-filter: drop-shadow(0px 0px 6px #151535);
+.no_thumbnail {
+display: flex;
+width: 199px;
+height: 199px;
+background-color: transparent;
+border: 1px dashed #adadad;
+text-align: center;
+align-items: center;
 }
 
 .text {

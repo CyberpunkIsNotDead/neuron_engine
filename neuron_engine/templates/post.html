@@ -19,9 +19,11 @@
           {{ full_name }}
         </div>
         <div class="single_pic">
-          <a href="{{ file.upload.url }}">
-            <img class="resized" src="{{ file.upload.url }}">
-          </a>
+          <div class="no_thumbnail">
+            <a href="{{ file.upload.url }}">
+              Нет уменьшенной копии
+            </a>
+          </div>
         </div>
       {% endif %}
     {% endfor %}
@@ -51,9 +53,11 @@
             </div>
             <div class="multiple_pic_wrapper">
               <div class="multiple_pic">
-                <a href="{{ file.upload.url }}">
-                  <img class="resized" src="{{ file.upload.url }}">
-                </a>
+                <div class="no_thumbnail">
+                  <a href="{{ file.upload.url }}">
+                    Нет уменьшенной копии
+                  </a>
+                </div>
               </div>
             </div>
           </div>
