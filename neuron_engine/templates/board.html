@@ -3,12 +3,12 @@
 <html>
   <head>
     <title>{{ board.name }}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'neuron_engine/neutral.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'neutral.css' %}">
     <meta charset="UTF-8">
   </head>
 
   <body>
-    <script src="{% static 'neuron_engine/jquery-3.4.0.min.js' %}"></script>
+    <script src="{% static 'jquery-3.4.0.min.js' %}"></script>
     <header>
       <div class="navigation">
         <a href={% url 'main_page' %}><div class="return" >←</div></a>
@@ -27,7 +27,7 @@
 
 <div class="page">
   <h1>{{ board.name }}</h1>
-  {% include 'neuron_engine/form.html' %}
+  {% include 'form.html' %}
 <br>
 {% for file_counter, ops_with_files, omitted_counters, replies_sets, replies_to_post in threads %}
 <!-- thread start -->
@@ -35,7 +35,7 @@
   {% for post, files in ops_with_files.items %}
     <div class="post_wrapper">
       <div class="original_post">
-      <h2>
+      <div class="post_header">
         {% if post.subject %}
           <span class="post_theme">{{ post.subject }}</span>
         {% endif %}
@@ -43,8 +43,8 @@
         <span class="pub_date">{{ post.pub_date|date:"D, d E Y H:i:s" }}</span>
         <span class="counter">#{{ post.counter }}</span>
         <a href={% url 'thread' board.url post.counter %}>[ Перейти к треду ]</a>
-      </h2>
-      {% include 'neuron_engine/post.html' %}
+      </div>
+      {% include 'post.html' %}
       </div>
     </div>
       {% if omitted_counters > 0 %}
@@ -60,7 +60,7 @@
         <div class="post_wrapper">
           <div class="indent">...</div>
           <div class="reply" id="{{ post.counter }}">
-            <h2>
+            <div class="post_header">
               <span class="post_counter">{{ inthread_counter }}</span>
               {% if post.subject %}
                 <span class="post_theme">{{ post.subject }}</span>
@@ -68,8 +68,8 @@
               <span class="author">{{ post.author }}</span>
               <span class="pub_date">{{ post.pub_date|date:"D, d E Y H:i:s" }}</span>
               <span class="counter">#{{ post.counter }}</span>
-            </h2>
-            {% include 'neuron_engine/post.html' %}
+            </div>
+            {% include 'post.html' %}
           </div>
         </div>
       {% endfor %}
@@ -81,7 +81,7 @@
 {% endfor %}
 <br>
     <footer>
-      Сделано на движке neuron
+      Используется движок neuron
     </footer>
 </div>
 

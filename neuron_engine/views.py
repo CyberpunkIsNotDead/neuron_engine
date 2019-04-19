@@ -28,7 +28,7 @@ def main_page(request):
         'info': info,
     }
 
-    return render(request, 'neuron_engine/main_page.html', context)
+    return render(request, 'main_page.html', context)
 
 
 
@@ -45,7 +45,7 @@ def board(request, board_url):
     if request.method == "GET":
 
         context = b.assemble_board_page(request, board, form)
-        return render(request, 'neuron_engine/board.html', context)
+        return render(request, 'board.html', context)
 
     elif request.method == "POST":
 
@@ -55,7 +55,7 @@ def board(request, board_url):
         posting.create_thread(board, form, uploads)
 
         context = b.assemble_board_page(request, board, form)
-        return render(request, 'neuron_engine/board.html', context)
+        return render(request, 'board.html', context)
 
 
 
@@ -81,7 +81,7 @@ def thread(request, board_url, original_post_counter):
     if request.method == "GET":
 
         context = t.assemble_thread(board, form, original_post)
-        return render(request, 'neuron_engine/thread.html', context)
+        return render(request, 'thread.html', context)
 
 
     elif request.method == "POST":
@@ -92,4 +92,4 @@ def thread(request, board_url, original_post_counter):
         posting.create_post(board, original_post, form, uploads)
 
         context = t.assemble_thread(board, form, original_post)
-        return render(request, 'neuron_engine/thread.html', context)
+        return render(request, 'thread.html', context)

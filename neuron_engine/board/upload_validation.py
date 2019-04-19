@@ -2,12 +2,9 @@ import os
 import magic
 
 
-def validate_uploaded_file(filename):
+def validate_uploaded_file(filename, m):
 
     result = None
-
-    m = magic.open(magic.MAGIC_MIME)
-    m.load()
 
     mimetype = m.file(filename)
     file_type = str((mimetype.split('/')[:1])[0])

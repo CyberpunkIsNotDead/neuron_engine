@@ -12,6 +12,8 @@ import os
 
 ''' posting '''
 
+m = magic.open(magic.MAGIC_MIME)
+m.load()
 
 def create_post(board, original_post, form, uploads): # form(request.POST, request.FILES)
 
@@ -77,7 +79,7 @@ def create_post(board, original_post, form, uploads): # form(request.POST, reque
                     for chunk in upload.chunks():
                         destination.write(chunk)
 
-                if validate_uploaded_file(save_path):
+                if validate_uploaded_file(save_path, m):
 
                     thumb = create_thumbnail(board, upload)
 
@@ -155,7 +157,7 @@ def create_thread(board, form, uploads): # form(request.POST, request.FILES)
                     for chunk in upload.chunks():
                         destination.write(chunk)
 
-                if validate_uploaded_file(save_path):
+                if validate_uploaded_file(save_path, m):
 
                     thumb = create_thumbnail(board, upload)
 

@@ -43,8 +43,6 @@ def make_reply_sub(finded, board, text, reply_regexp):
 
         int(num)
 
-        print(num)
-
         replies_relation = Replies.objects.create().id
         replies_relations.append(replies_relation)
 
