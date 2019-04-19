@@ -58,6 +58,7 @@
     {% for inthread_counter, file_counter, reply_with_files, replies_to_post in replies_sets %}
       {% for post, files in reply_with_files.items %}
         <div class="post_wrapper">
+          <div class="indent">...</div>
           <div class="reply" id="{{ post.counter }}">
             <h2>
               <span class="post_counter">{{ inthread_counter }}</span>

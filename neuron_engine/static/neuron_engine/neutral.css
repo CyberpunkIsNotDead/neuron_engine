@@ -121,8 +121,13 @@ box-shadow: 0px 0px 3px white;
 }
 
 .post_wrapper {
-display: block table;
+display: block;
 padding: 5px 5px;
+}
+
+.indent {
+float: left;
+margin: 0 5px 0 0;
 }
 
 .reply {
