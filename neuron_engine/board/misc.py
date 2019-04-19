@@ -53,10 +53,8 @@ def get_file_info(rows):
     for r in rows:
         n = str((r.upload.name.split('/')[-1:])[0])
         full_filenames.append(n)
-        print(n)
         if len(n) > 20:
             n = n[:8] + '...' + n[-8:]
-            print(n)
             short_filenames.append(n)
         else:
             short_filenames.append(n)
