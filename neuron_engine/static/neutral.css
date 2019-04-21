@@ -1,4 +1,9 @@
+@import url("webfonts/robotoslab.css");
+@import url("webfonts/hack.css");
+
 body {
+font-family: 'Roboto Slab', serif;
+font-size: 16px;
 color: #dadada;
 background-color: #635f7f;
 }
@@ -20,32 +25,20 @@ border: 1px solid #aaaaaa;
 
 .return {
 padding: 0px 10px;
-background-color: #222233;
-height: 30px;
 position: relative;
 left: 0px;
 display: inline-block;
 text-align: center;
-font-size: 250%;
-vertical-align: middle;
-line-height: 30px;
 }
 
 .navigation {
-color: white;
 float: left;
-position: relative;
-top: 50%;
-transform: translateY(-50%);
 }
 
 .pagination {
-color: white;
 float: right;
 position: relative;
-right: 20px;
-top: 50%;
-transform: translateY(-50%);
+right: 10px;
 }
 
 .active {
@@ -146,6 +139,7 @@ padding: 10px 14px;
 position: relative;
 text-align: left;
 box-shadow: 0px 0px 4px #1f1f1f;
+max-width: inherit;
 }
 
 .file_block {
@@ -217,6 +211,7 @@ align-items: center;
 
 .text {
 color: #dadada;
+display: inline;
 }
 
 .citation {
@@ -230,6 +225,36 @@ color: #282333;
 
 .spoiler:hover {
 color: #dadada;
+}
+
+.mono {
+font-family: 'Hack', monospace; 
+}
+
+.code {
+display: block;
+font-family: 'Hack', monospace;
+border-collapse: collapse;
+margin: 0 0 0 0;
+background-color: #181323;
+}
+
+.code li {
+padding: 0 7px;
+}
+
+.code li:nth-child(odd) {
+background-color: #383353;
+}
+
+.code li:nth-child(even) {
+background-color: #282343;
+}
+
+pre {
+padding: 0 5px;
+margin: 0 0 0 0;
+white-space: pre-wrap;
 }
 
 h1 {
@@ -254,7 +279,7 @@ text-shadow: 0px 0px 2px white;
 header {
 display: block;
 width: 100%;
-height: 30px;
+height: auto;
 position: fixed;
 left: 0px;
 top: 0px;

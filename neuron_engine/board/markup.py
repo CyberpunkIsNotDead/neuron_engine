@@ -13,6 +13,7 @@ wakaba_mark = [
     (r'(\*\*)([\s\S]*?)(\*\*)', r'<strong>\2</strong>'),
     (r'(__)([\s\S]*?)(__)', r'<em>\2</em>'),
     (r'(\^\^)([\s\S]*?)(\^\^)', r'<del>\2</del>'),
+    (r'(``)([\s\S]*?)(``)', r'<span class="mono">\2</span>'),
     (r'(https?:\/\/(www\.)?[-\w\d@:%._\+~#=]{2,256}\.[\w]{2,6}\b([-\w\d@:%_\+.~#?&//=]*))', r'<a href="\1">\1</a>'),
 ]
 
@@ -21,13 +22,18 @@ def markup_text(board, markup_list, text):
     text = escape(text)
 
     reply_regex = re.compile(r'&gt;&gt;([0-9]+)')
+    finded_replies = reply_regex.findall(text)
 
-    finded = reply_regex.findall(text)
-
-    if finded:
-        text, replies_relations = make_reply_sub(finded, board, text, reply_regex)
+    if finded_replies:
+        text, replies_relations = make_reply_sub(finded_replies, board, text, reply_regex)
     else:
         replies_relations = None
+
+    code_regex = re.compile(r'```([\s\S]*?)```')
+    finded_code = code_regex.findall(text)
+
+    if finded_code:
+        text = make_code_sub(finded_code, text)
 
     for regex, sub in markup_list:
         text = re.sub(regex, sub, text)
@@ -84,3 +90,20 @@ def make_reply_sub(finded, board, text, reply_regexp):
                 text = text.replace('&gt;&gt;%s' % num, sub)
 
     return text, replies_relations
+
+
+def make_code_sub(finded_code, text):
+    
+    for code in finded_code:
+
+        sub = '<div style="overflow-x: auto;"><pre><ol class="code">'
+
+        for n, string in enumerate(code.splitlines()):
+            print(str(n)+' '+string)
+            sub += '<li><span class="code_string">%s</span></li>' % string
+        
+        sub += '</ol><pre></div>'
+        
+        text = text.replace('```%s```' % code, sub)
+    
+    return text

@@ -16,11 +16,11 @@
     <script src="{% static 'jquery-3.4.0.min.js' %}"></script>
     <header>
       <div class="navigation">
-        <a href={% url 'board' board.url %}><div class="return" >←</div></a>
-          <a href={% url 'main_page' %}>Главная страница</a> |
+        [<a href={% url 'board' board.url %}><div class="return" >←</div></a>]
+          [<a href={% url 'main_page' %}>Главная страница</a>]
           Доски:
           {% for board in boards %}
-            <a href={% url 'board' board.url %}>{{ board.name }}</a> |
+            [<a href={% url 'board' board.url %}>{{ board.name }}</a>]
           {% endfor %}
       </div>
     </header>
