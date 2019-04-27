@@ -51,21 +51,8 @@
         {% else %}
           <div class="multiple_file_container">
             <div class="multiple_file_info"
-              onmouseover="{
-                this.innerHTML='{{ full_name }}';
-                this.style.backgroundColor='black';
-                this.style.minWidth='16em';
-                this.style.width='auto';
-                this.style.overflow='visible';
-                this.style.zIndex='2';
-                };" 
-              onmouseout="{
-                this.innerHTML='{{ size|filesizeformat }}, {{ short_name }}';
-                this.style.backgroundColor='transparent';
-                this.style.width='16em';
-                this.style.overflow='hidden';
-                this.style.zIndex='1';
-                };">
+              onmouseover="showFullName(this, '{{ full_name }}')" 
+              onmouseout="showShortName(this, '{{ size|filesizeformat }}', '{{ short_name }}')">
               {{ size|filesizeformat }},
               {{ short_name }}
             </div>
