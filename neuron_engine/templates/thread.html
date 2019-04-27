@@ -9,11 +9,10 @@
         {{ board.name }} — тред
       {% endif %}
     </title>
-    <link rel="stylesheet" type="text/css" href="{% static 'neutral.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/neutral.css' %}">
     <meta charset="UTF-8">
   </head>
   <body>
-    <script src="{% static 'jquery-3.4.0.min.js' %}"></script>
     <header>
       <div class="navigation">
         [<a href={% url 'board' board.url %}><div class="return" >←</div></a>]
@@ -32,7 +31,9 @@
           {{ board.name }} — тред
         {% endif %}
       </h1>
-      {% include 'form.html' %}
+      <div class="form_wrapper" id="upper_form">
+        {% include 'form.html' %}
+      </div>
       <br>
 <!-- thread start -->
       <div class="thread">
@@ -73,12 +74,16 @@
               {% endfor %}
           {% endfor %}
         {% endif %}
+      </div>
 <!-- thread end -->
-</div>
 <br>
+    <div class="form_wrapper" id="lower_form">
+      {% include 'form.html' %}
+    </div>
     <footer>
       Используется движок neuron
     </footer>
+    {% include 'scripts.html' %}
 </div>
 </body>
 </html>

@@ -3,12 +3,11 @@
 <html>
   <head>
     <title>{{ board.name }}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'neutral.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/neutral.css' %}">
     <meta charset="UTF-8">
   </head>
 
   <body>
-    <script src="{% static 'jquery-3.4.0.min.js' %}"></script>
     <header>
       <div class="navigation">
         [<a href={% url 'main_page' %}><div class="return" >←</div></a>]
@@ -24,10 +23,11 @@
         {% endfor %}
       </div>
     </header>
-
 <div class="page">
   <h1>{{ board.name }}</h1>
-  {% include 'form.html' %}
+  <div class="form_wrapper" id="upper_form">
+    {% include 'form.html' %}
+  </div>
 <br>
 {% for file_counter, ops_with_files, omitted_counters, replies_sets, replies_to_post in threads %}
 <!-- thread start -->
@@ -80,9 +80,13 @@
 <br>
 {% endfor %}
 <br>
+  <div class="form_wrapper" id="lower_form">
+    {% include 'form.html' %}
+  </div>
     <footer>
       Используется движок neuron
     </footer>
+    {% include 'scripts.html' %}
 </div>
 
   </body>

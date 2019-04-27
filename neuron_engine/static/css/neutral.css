@@ -3,7 +3,7 @@
 
 body {
 font-family: 'Roboto Slab', serif;
-font-size: 16px;
+font-size: 100%;
 color: #dadada;
 background-color: #635f7f;
 }
@@ -51,7 +51,7 @@ font-weight: bold;
 }
 
 .post_header {
-font-size: small;
+font-size: 80%;
 color: #ffa8a8;
 font-weight: normal;
 margin: 0 0 5px 0;
@@ -81,9 +81,10 @@ font-weight: bold;
 } */
 
 .replies {
+color: #dadada;
 display: inline-block;
 margin: 10px 10px;
-font-size: small;
+font-size: 80%;
 }
 
 .original_post {
@@ -158,7 +159,7 @@ margin: 0 0 20px 0;
 display: block;
 margin: 0 0 12px 0;
 color: #bfbfbf;
-font-size: small;
+font-size: 12px;
 overflow: auto;
 }
 
@@ -166,9 +167,9 @@ overflow: auto;
 display: block;
 position: absolute;
 display: block;
-margin: 0 0 12px 0;
+padding: 5px 8px;
 color: #bfbfbf;
-font-size: small;
+font-size: 80%;
 text-align: center;
 width: 16em;
 overflow: hidden;
@@ -212,6 +213,7 @@ align-items: center;
 .text {
 color: #dadada;
 display: inline;
+font-size: 105%;
 }
 
 .citation {
@@ -228,12 +230,14 @@ color: #dadada;
 }
 
 .mono {
-font-family: 'Hack', monospace; 
+font-family: 'Hack', monospace;
+font-size: 95%;
 }
 
 .code {
 display: block;
 font-family: 'Hack', monospace;
+font-size: 95%;
 border-collapse: collapse;
 margin: 0 0 0 0;
 background-color: #181323;
@@ -298,7 +302,7 @@ justify-content: center;
 }
 
 form {
-display: inline-block;
+display: block;
 margin: auto;
 padding: 5px 5px;
 }
@@ -369,6 +373,10 @@ padding: 7px 7px;
 background-color: #585373;
 }
 
+
+.form_action {
+display: block;
+}
 
 hr {
 color: #a1a1a1;

@@ -33,10 +33,13 @@
       {% for file, short_name, full_name, size in files %}
         {% if file.thumbnail %}
           <div class="multiple_file_container">
-            <div class="multiple_file_info">
+            <div class="multiple_file_info"
+              onmouseover="showFullName(this, '{{ full_name }}')" 
+              onmouseout="showShortName(this, '{{ size|filesizeformat }}', '{{ short_name }}')">
               {{ size|filesizeformat }},
               {{ short_name }}
             </div>
+            <div class="full_filename" style="overflow:hidden;"></div>
             <div class="multiple_pic_wrapper">
               <div class="multiple_pic">
                 <a href="{{ file.upload.url }}">
@@ -47,7 +50,22 @@
           </div>
         {% else %}
           <div class="multiple_file_container">
-            <div class="multiple_file_info">
+            <div class="multiple_file_info"
+              onmouseover="{
+                this.innerHTML='{{ full_name }}';
+                this.style.backgroundColor='black';
+                this.style.minWidth='16em';
+                this.style.width='auto';
+                this.style.overflow='visible';
+                this.style.zIndex='2';
+                };" 
+              onmouseout="{
+                this.innerHTML='{{ size|filesizeformat }}, {{ short_name }}';
+                this.style.backgroundColor='transparent';
+                this.style.width='16em';
+                this.style.overflow='hidden';
+                this.style.zIndex='1';
+                };">
               {{ size|filesizeformat }},
               {{ short_name }}
             </div>
