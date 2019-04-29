@@ -31,9 +31,17 @@
           {{ board.name }} — тред
         {% endif %}
       </h1>
-      <div class="form_wrapper" id="upper_form">
-        {% include 'form.html' %}
+      <div class="form_placeholder" id="upper_placeholder">
+        [ <a href="javascript:void(0);"
+        onclick="displayForm(
+        this.parentNode,
+        document.getElementById('lower_placeholder'),
+        document.getElementById('upper_form'),
+        document.getElementById('lower_form'),
+        '{{ csrf_token }}'
+        )">Показать форму</a> ]
       </div>
+      <div class="form_wrapper" id="upper_form"></div>
       <br>
 <!-- thread start -->
       <div class="thread">
@@ -77,9 +85,17 @@
       </div>
 <!-- thread end -->
 <br>
-    <div class="form_wrapper" id="lower_form">
-      {% include 'form.html' %}
+    <div class="form_placeholder" id="lower_placeholder">
+      [ <a href="javascript:void(0);"
+      onclick="displayForm(
+      this.parentNode,
+      document.getElementById('upper_placeholder'),
+      document.getElementById('lower_form'),
+      document.getElementById('upper_form'),
+      '{{ csrf_token }}'
+      )">Показать форму</a> ]
     </div>
+    <div class="form_wrapper" id="lower_form"></div>
     <footer>
       Используется движок neuron
     </footer>

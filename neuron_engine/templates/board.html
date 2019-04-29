@@ -25,9 +25,18 @@
     </header>
 <div class="page">
   <h1>{{ board.name }}</h1>
-  <div class="form_wrapper" id="upper_form">
-    {% include 'form.html' %}
+  <div class="form_placeholder" id="upper_placeholder">
+    [ <a href="javascript:void(0);"
+    onclick="displayForm(
+    this.parentNode,
+    document.getElementById('lower_placeholder'),
+    document.getElementById('upper_form'),
+    document.getElementById('lower_form'),
+    '{{ csrf_token }}'
+    )">Показать форму</a> ]
   </div>
+  <div class="form_wrapper" id="upper_form"></div>
+  <ul id="fileList"></ul>
 <br>
 {% for file_counter, ops_with_files, omitted_counters, replies_sets, replies_to_post in threads %}
 <!-- thread start -->
@@ -80,9 +89,17 @@
 <br>
 {% endfor %}
 <br>
-  <div class="form_wrapper" id="lower_form">
-    {% include 'form.html' %}
+  <div class="form_placeholder" id="lower_placeholder">
+    [ <a href="javascript:void(0);"
+    onclick="displayForm(
+    this.parentNode,
+    document.getElementById('upper_placeholder'),
+    document.getElementById('lower_form'),
+    document.getElementById('upper_form'),
+    '{{ csrf_token }}'
+    )">Показать форму</a> ]
   </div>
+  <div class="form_wrapper" id="lower_form"></div>
     <footer>
       Используется движок neuron
     </footer>

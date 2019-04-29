@@ -1,14 +1,5 @@
 {# included in board.html, thread.html #}
 {% load static %}
-<script src="{% static 'js/jquery-3.4.0.min.js' %}"></script>
-<script type="text/javascript">
-  counter = 2;
-  jQuery(function($) {
-    $('form').on('change', 'input[type=file]', function() {
-      var form = $(this).closest('form');
-      form.append('<tr><td><input type="file" name="upload" id="id_upload'+counter+'"><label for="id_upload'+counter+'" class="finput">Выбрать файл</label></td></tr>');
-      counter++;
-    });
-  });
-</script>
 <script src="{% static 'js/files.js' %}"></script>
+<script src="{% static 'js/mult_input_filenames.js' %}"></script>
+<script src="{% static 'js/posting_form.js' %}"></script>
