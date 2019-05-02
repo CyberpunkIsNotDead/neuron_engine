@@ -27,7 +27,7 @@
         </div>
       {% endif %}
     {% endfor %}
-    <div class="text">{{ post.text|linebreaks }}</div>
+    <div class="text">{{ post.text|linebreaksbr }}</div>
   {% else %}
     <div class="file_block">
       {% for file, short_name, full_name, size in files %}
@@ -69,12 +69,13 @@
         {% endif %}
       {% endfor %}
     </div>
-    <div class="text">{{ post.text|linebreaks }}</div>
+    <div class="text">{{ post.text|linebreaksbr }}</div>
   {% endif %}
 {% else %}
-  <div class="text">{{ post.text|linebreaks }}</div>
+  <div class="text">{{ post.text|linebreaksbr }}</div>
 {% endif %}
 {% if replies_to_post|length == 1 %}
+  <br>
   <div class="replies">
     Ответ:
     {% autoescape off %}
@@ -82,11 +83,11 @@
     {% endautoescape %}
   </div>
 {% elif replies_to_post|length > 1 %}
+  <br>
   <div class="replies">
     Ответы:
     {% autoescape off %}
     {{ replies_to_post|join:", " }}
     {% endautoescape %}
   </div>
-{% else %}
 {% endif %}

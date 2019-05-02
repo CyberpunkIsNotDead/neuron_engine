@@ -51,7 +51,7 @@
         <span class="author">{{ post.author }}</span>
         <span class="pub_date">{{ post.pub_date|date:"D, d E Y H:i:s" }}</span>
         <span class="counter">#{{ post.counter }}</span>
-        <a href={% url 'thread' board.url post.counter %}>[ Перейти к треду ]</a>
+        [ <a href={% url 'thread' board.url post.counter %}>Перейти к треду</a> ]
       </div>
       {% include 'post.html' %}
       </div>
@@ -100,6 +100,11 @@
     )">Показать форму</a> ]
   </div>
   <div class="form_wrapper" id="lower_form"></div>
+  <noscript>
+    <div class="form_wrapper" id="form">
+      {% include 'form.html' %}
+    </div>
+  </noscript>
     <footer>
       Используется движок neuron
     </footer>

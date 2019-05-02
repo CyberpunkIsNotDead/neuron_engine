@@ -88,12 +88,12 @@ def make_pagination(current_page, pages_count):
     pagination = []
     for page in range(1, pages_count+1):
         if page == current_page:
-            string = '<a class="active" href="?page=%s">[%s]</a>' % (
+            string = '[ <a class="active" href="?page=%s">%s</a> ]' % (
                 current_page,
                 current_page
                 )
         else:
-            string = '<a href="?page=%s">[%s]</a>' % (
+            string = '[ <a href="?page=%s">%s</a> ]' % (
                 page,
                 page
                 )
