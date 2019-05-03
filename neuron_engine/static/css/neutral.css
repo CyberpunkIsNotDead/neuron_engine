@@ -7,12 +7,14 @@ font-size: 100%;
 color: #dadada;
 background-color: #635f7f;
 width: auto;
+max-width: 100%;
+margin: 0 0;
 }
 
 .page {
 position: relative;
 top: 30px;
-padding: 0 18px 0 18px;
+padding: 0 30px 0 30px;
 position: relative;
 width: inherit;
 max-width: inherit;
@@ -113,8 +115,8 @@ border-radius: 6px;
 box-shadow: 0px 0px 4px #3f3f3f;
 position: relative;
 z-index: 1;
-max-width: 100%;
-width: fit-content(100%);
+max-width: inherit;
+width: auto;
 }
 
 .omitted {
@@ -142,7 +144,6 @@ box-shadow: 0px 0px 3px white;
 display: grid;
 align-items: start;
 grid-template-columns: max-content fit-content(100%);
-grid-auto-columns: max-content;
 padding: 5px 5px;
 width: inherit;
 max-width: inherit;
@@ -166,8 +167,7 @@ position: relative;
 text-align: left;
 box-shadow: 0px 0px 4px #1f1f1f;
 max-width: inherit;
-width: fit-content(100%);
-max-width: inherit;
+width: auto;
 }
 
 .post_content_wrapper_single {
@@ -175,17 +175,23 @@ display: grid;
 grid-template-columns: auto auto;
 align-items: start;
 justify-content: start;
+width: inherit;
+max-width: inherit;
 }
 
-.post_content_wrapper_single {
+.post_content_wrapper_multiple {
 display: grid;
 grid-template-rows: auto auto;
 align-items: start;
 justify-content: start;
+width: inherit;
+max-width: inherit;
 }
 
 .file_block {
 display: table;
+width: inherit;
+max-width: inherit;
 }
 
 .multiple_file_container {
@@ -202,6 +208,8 @@ margin: 0 0 12px 0;
 color: #bfbfbf;
 font-size: 12px;
 overflow: auto;
+width: inherit;
+max-width: inherit;
 }
 
 .multiple_file_info {
@@ -259,8 +267,9 @@ align-items: center;
 color: #dadada;
 display: inline-block;
 font-size: 105%;
-width: 100%;
-max-width: 100%;
+width: auto;
+max-width: inherit;
+overflow: auto;
 overflow-wrap: break-word;
 word-wrap: break-word;
 word-break: break-word;
@@ -450,13 +459,4 @@ display: block;
 hr {
 color: #a1a1a1;
 margin: 25px 0 16px 0;
-}
-
-p {
-display: inline-block;
-padding: 0 0;
-margin: 8px 0 8px 0;
-width: inherit;
-white-space: pre-wrap;
-word-break: break-all;
 }
