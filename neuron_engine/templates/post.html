@@ -2,77 +2,81 @@
 
 {% if files %}
   {% if file_counter == 1 %}
-    {% for file, short_name, full_name, size in files %}
-      {% if file.thumbnail %}
-        <div class="single_file_info">
-          {{ size|filesizeformat }},
-          {{ full_name }}
-        </div>
-        <div class="single_pic">
-          <a href="{{ file.upload.url }}">
-            <img class="thumbnail" src="{{ file.thumbnail.url }}">
-          </a>
-        </div>
-      {% else %}
-        <div class="single_file_info">
-          {{ size|filesizeformat }},
-          {{ full_name }}
-        </div>
-        <div class="single_pic">
-          <div class="no_thumbnail">
-            <a href="{{ file.upload.url }}">
-              Нет уменьшенной копии
-            </a>
-          </div>
-        </div>
-      {% endif %}
-    {% endfor %}
-    <div class="text">{{ post.text|linebreaksbr }}</div>
-  {% else %}
-    <div class="file_block">
       {% for file, short_name, full_name, size in files %}
         {% if file.thumbnail %}
-          <div class="multiple_file_container">
-            <div class="multiple_file_info"
-              onmouseover="showFullName(this, '{{ full_name }}')" 
-              onmouseout="showShortName(this, '{{ size|filesizeformat }}', '{{ short_name }}')">
-              {{ size|filesizeformat }},
-              {{ short_name }}
+          <div class="single_file_info">
+            {{ size|filesizeformat }},
+            {{ full_name }}
+          </div>
+          <div class="post_content_wrapper_single">
+            <div class="single_pic">
+              <a href="{{ file.upload.url }}">
+                <img class="thumbnail" src="{{ file.thumbnail.url }}">
+              </a>
             </div>
-            <div class="full_filename" style="overflow:hidden;"></div>
-            <div class="multiple_pic_wrapper">
-              <div class="multiple_pic">
+          {% else %}
+            <div class="single_file_info">
+              {{ size|filesizeformat }},
+              {{ full_name }}
+            </div>
+            <div class="single_pic">
+              <div class="no_thumbnail">
                 <a href="{{ file.upload.url }}">
-                  <img class="thumbnail" src="{{ file.thumbnail.url }}">
+                  Нет уменьшенной копии
                 </a>
               </div>
             </div>
-          </div>
-        {% else %}
-          <div class="multiple_file_container">
-            <div class="multiple_file_info"
-              onmouseover="showFullName(this, '{{ full_name }}')" 
-              onmouseout="showShortName(this, '{{ size|filesizeformat }}', '{{ short_name }}')">
-              {{ size|filesizeformat }},
-              {{ short_name }}
-            </div>
-            <div class="multiple_pic_wrapper">
-              <div class="multiple_pic">
-                <div class="no_thumbnail">
+          {% endif %}
+        {% endfor %}
+      <div class="text" onresize="resizeTextWidth(this)">{{ post.text|linebreaksbr }}</div>
+        </div>
+  {% else %}
+    <div class="post_content_wrapper_multiple">
+      <div class="file_block">
+        {% for file, short_name, full_name, size in files %}
+          {% if file.thumbnail %}
+            <div class="multiple_file_container">
+              <div class="multiple_file_info"
+                onmouseover="showFullName(this, '{{ full_name }}')" 
+                onmouseout="showShortName(this, '{{ size|filesizeformat }}', '{{ short_name }}')">
+                {{ size|filesizeformat }},
+                {{ short_name }}
+              </div>
+              <div class="full_filename" style="overflow:hidden;"></div>
+              <div class="multiple_pic_wrapper">
+                <div class="multiple_pic">
                   <a href="{{ file.upload.url }}">
-                    Нет уменьшенной копии
+                    <img class="thumbnail" src="{{ file.thumbnail.url }}">
                   </a>
                 </div>
               </div>
             </div>
-          </div>
-        {% endif %}
-      {% endfor %}
+          {% else %}
+            <div class="multiple_file_container">
+              <div class="multiple_file_info"
+                onmouseover="showFullName(this, '{{ full_name }}')" 
+                onmouseout="showShortName(this, '{{ size|filesizeformat }}', '{{ short_name }}')">
+                {{ size|filesizeformat }},
+                {{ short_name }}
+              </div>
+              <div class="multiple_pic_wrapper">
+                <div class="multiple_pic">
+                  <div class="no_thumbnail">
+                    <a href="{{ file.upload.url }}">
+                      Нет уменьшенной копии
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="text" onresize="resizeTextWidth(this)">{{ post.text|linebreaksbr }}</div>
     </div>
-    <div class="text">{{ post.text|linebreaksbr }}</div>
   {% endif %}
 {% else %}
-  <div class="text">{{ post.text|linebreaksbr }}</div>
+  <div class="text" onresize="resizeTextWidth(this)">{{ post.text|linebreaksbr }}</div>
 {% endif %}
 {% if replies_to_post|length == 1 %}
   <br>

@@ -6,7 +6,7 @@ font-family: 'Roboto Slab', serif;
 font-size: 100%;
 color: #dadada;
 background-color: #635f7f;
-width: calc(100%-36px);
+width: auto;
 }
 
 .page {
@@ -15,6 +15,7 @@ top: 30px;
 padding: 0 18px 0 18px;
 position: relative;
 width: inherit;
+max-width: inherit;
 }
 
 .boards_list {
@@ -49,7 +50,9 @@ font-weight: bold;
 }
 
 .thread {
+display: grid;
 width: inherit;
+max-width: inherit;
 }
 
 .post_header {
@@ -61,27 +64,35 @@ margin: 0 0 5px 0;
 }
 
 .counter {
+display: inline-block;
 font-weight: bold;
 }
 
 .post_counter {
+display: inline-block;
 color: #aaaaaa;
 font-weight: bold;
 }
 
 .post_theme {
+display: inline-block;
 color: #ff6252;
 font-weight: bold;
 }
 
 .author {
+display: inline-block;
 color: #cacafa;
 font-weight: bold;
 }
 
-/* .pub_date {
-font-weight: bold;
-} */
+.pub_date {
+display: inline-block;
+}
+
+.to_thread {
+display: inline-block;
+}
 
 .replies {
 color: #dadada;
@@ -91,7 +102,8 @@ font-size: 80%;
 }
 
 .original_post {
-display: table;
+display: grid;
+justify-content: start;
 background-color: #5a5676;
 color: white;
 padding: 16px 14px;
@@ -101,7 +113,8 @@ border-radius: 6px;
 box-shadow: 0px 0px 4px #3f3f3f;
 position: relative;
 z-index: 1;
-width: inherit;
+max-width: 100%;
+width: fit-content(100%);
 }
 
 .omitted {
@@ -126,9 +139,13 @@ box-shadow: 0px 0px 3px white;
 }
 
 .post_wrapper {
-display: block;
+display: grid;
+align-items: start;
+grid-template-columns: max-content fit-content(100%);
+grid-auto-columns: max-content;
 padding: 5px 5px;
 width: inherit;
+max-width: inherit;
 }
 
 .indent {
@@ -139,7 +156,8 @@ margin: 0 5px 0 0;
 }
 
 .reply {
-display: table;
+display: grid;
+justify-content: start;
 background-color: #484363;
 border-radius: 6px;
 color: white;
@@ -148,7 +166,22 @@ position: relative;
 text-align: left;
 box-shadow: 0px 0px 4px #1f1f1f;
 max-width: inherit;
-width: inherit;
+width: fit-content(100%);
+max-width: inherit;
+}
+
+.post_content_wrapper_single {
+display: grid;
+grid-template-columns: auto auto;
+align-items: start;
+justify-content: start;
+}
+
+.post_content_wrapper_single {
+display: grid;
+grid-template-rows: auto auto;
+align-items: start;
+justify-content: start;
 }
 
 .file_block {
@@ -226,9 +259,14 @@ align-items: center;
 color: #dadada;
 display: inline-block;
 font-size: 105%;
-width: inherit;
-white-space: pre-wrap;
+width: 100%;
+max-width: 100%;
+overflow-wrap: break-word;
+word-wrap: break-word;
+word-break: break-word;
+/*white-space: pre-wrap;
 word-break: break-all;
+hyphens: auto;*/
 }
 
 .citation {
