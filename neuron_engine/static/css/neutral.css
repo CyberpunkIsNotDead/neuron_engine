@@ -105,6 +105,7 @@ font-size: 80%;
 
 .original_post {
 display: grid;
+grid-template-columns: auto;
 justify-content: start;
 background-color: #5a5676;
 color: white;
@@ -158,6 +159,7 @@ margin: 0 5px 0 0;
 
 .reply {
 display: grid;
+grid-template-columns: auto;
 justify-content: start;
 background-color: #484363;
 border-radius: 6px;
@@ -173,6 +175,7 @@ width: auto;
 .post_content_wrapper_single {
 display: grid;
 grid-template-columns: auto auto;
+/*grid-template-columns: repeat(auto-fit, minmax(220px, auto));*/
 align-items: start;
 justify-content: start;
 width: inherit;
@@ -188,8 +191,19 @@ width: inherit;
 max-width: inherit;
 }
 
+@media (max-width: 700px) {
+.post_content_wrapper_single {
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    }
+/*.text {
+    grid-column: span 2;
+    }*/
+}
+
 .file_block {
-display: table;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 220px));
 width: inherit;
 max-width: inherit;
 }
