@@ -93,7 +93,7 @@ def create_post(board, original_post, form, uploads): # form(request.POST, reque
 
                     upl.save()
     else:
-        return HttpResponse('form error')
+        print(form.errors)
 
 
 
@@ -170,4 +170,4 @@ def create_thread(board, form, uploads): # form(request.POST, request.FILES)
 
                     upl.save()
     else:
-        return HttpResponse('form error')
+        print(form.errors)

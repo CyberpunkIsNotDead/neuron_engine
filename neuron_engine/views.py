@@ -88,6 +88,7 @@ def thread(request, board_url, original_post_counter):
 
         uploads = request.FILES.getlist('upload')
         form = PostForm(request.POST)
+        print(request.POST, request.FILES, uploads)
 
         posting.create_post(board, original_post, form, uploads)
 
