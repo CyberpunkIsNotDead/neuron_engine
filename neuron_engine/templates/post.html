@@ -38,7 +38,7 @@
           {% if file.thumbnail %}
             <div class="multiple_file_container">
               <div class="multiple_file_info"
-                onmouseover="showFullName(this, '{{ full_name }}')" 
+                onmouseover="showFullName(this, '{{ full_name }}')"
                 onmouseout="showShortName(this, '{{ size|filesizeformat }}', '{{ short_name }}')">
                 {{ size|filesizeformat }},
                 {{ short_name }}
@@ -55,7 +55,7 @@
           {% else %}
             <div class="multiple_file_container">
               <div class="multiple_file_info"
-                onmouseover="showFullName(this, '{{ full_name }}')" 
+                onmouseover="showFullName(this, '{{ full_name }}')"
                 onmouseout="showShortName(this, '{{ size|filesizeformat }}', '{{ short_name }}')">
                 {{ size|filesizeformat }},
                 {{ short_name }}

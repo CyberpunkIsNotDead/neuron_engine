@@ -1,5 +1,5 @@
-@import url("webfonts/robotoslab.css");
-@import url("webfonts/hack.css");
+@import url("../webfonts/robotoslab.css");
+@import url("../webfonts/hack.css");
 
 body {
 font-family: 'Roboto Slab', serif;
@@ -449,7 +449,7 @@ color: #c7c7c7;
 
 #files_selection {
 display: grid;
-justify-content: center;
+place-items: center;
 padding: 10px 10px;
 margin-top: 10px;
 width: 60vw;
@@ -476,8 +476,19 @@ overflow: hidden;
 z-index: -1;
 }
 
+input[type=text] {
+font-family: 'Roboto Slab', serif;
+font-size: 100%;
+}
+
+textarea {
+font-family: 'Roboto Slab', serif;
+font-size: 100%;
+}
+
 .finput {
 display: inline-block;
+width: max-content;
 color: #dadada;
 padding: 7px 7px;
 position: relative;

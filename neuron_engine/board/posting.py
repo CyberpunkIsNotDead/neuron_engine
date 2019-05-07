@@ -9,6 +9,7 @@ from .thumbnail import *
 from .upload_validation import *
 
 import os
+import time
 
 ''' posting '''
 
@@ -72,7 +73,9 @@ def create_post(board, original_post, form, uploads): # form(request.POST, reque
 
             for upload in uploads:
 
-                upl_path = os.path.join(board.url, upload.name)
+                timestamp = str(int(time.time() * 1000))
+                new_name = timestamp + '-' + upload.name
+                upl_path = os.path.join(board.url, new_name)
                 save_path = os.path.join(settings.MEDIA_ROOT, upl_path)
 
                 with open(save_path, 'wb+') as destination:
@@ -150,7 +153,9 @@ def create_thread(board, form, uploads): # form(request.POST, request.FILES)
 
             for upload in uploads:
 
-                upl_path = os.path.join(board.url, upload.name)
+                timestamp = str(int(time.time() * 1000))
+                new_name = timestamp + '-' + upload.name
+                upl_path = os.path.join(board.url, new_name)
                 save_path = os.path.join(settings.MEDIA_ROOT, upl_path)
 
                 with open(save_path, 'wb+') as destination:

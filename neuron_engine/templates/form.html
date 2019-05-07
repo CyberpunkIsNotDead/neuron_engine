@@ -1,28 +1,12 @@
 {# included in board.html, thread.html #}
 <form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
-  <table class="input_form" border="0" cellpadding="0" cellspacing="0">
-    <tr>
-      <td>
-        {{ form.author }}
-      </td>
-    </tr>
-    <tr>
-      <td>
-        {{ form.subject }}
-      </td>
-    </tr>
-    <tr>
-      <td>
-        {{ form.text }}
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <input type="file" multiple="" name="upload" id="id_upload">
-        <label for="id_upload" class="finput">Выбрать файл</label>
-      </td>
-    </tr>
-  </table>
-  <button class="form_submit" type="submit">Отправить</button>
+  <div class="input_form" border="0" cellpadding="0" cellspacing="0">
+    {{ form.author }}
+    {{ form.subject }}
+    {{ form.text }}
+    <input type="file" multiple="" name="upload" id="id_upload">
+    <label for="id_upload" class="finput">Выбрать файл(ы)</label>
+  </div>
+  <button type="button" id="form_submit">Отправить</div>
 </form>

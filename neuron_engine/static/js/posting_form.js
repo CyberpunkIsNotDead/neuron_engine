@@ -7,25 +7,27 @@ function displayForm(this_placeholder, other_placeholder, wrapper, other_wrapper
         <input type="text" name="subject" class="textinput" placeholder="Тема" maxlength="100" id="id_subject">
         <textarea name="text" class="textarea" placeholder="Текст сообщения" maxlength="3000" required="" id="id_text"></textarea>
         <div id="files_selection">
-          <p>Перетащи файл сюда</p>
+          <p>Перетащи файлы сюда или выбери их с помощью кнопки</p>
           <div id="images"></div>
           <input type="file" multiple="" name="upload" id="id_upload">
           <label for="id_upload" class="finput">Выбрать файл(ы)</label>
         </div>
     </div>
-    <div id="form_submit">Отправить</div>
+    <button type="button" id="form_submit">Отправить</div>
   </form>`;
   const hide_form = assembleActionLink('hideForm', other_placeholder, wrapper, other_wrapper, csrf_token, 'Скрыть форму',);
 
   wrapper.innerHTML = form;
   this_placeholder.innerHTML = hide_form;
-  
+
   if (other_wrapper.hasChildNodes()) {
     const show_form = assembleActionLink('displayForm', this_placeholder, other_wrapper, wrapper, csrf_token, 'Показать форму',);
     other_wrapper.removeChild(other_wrapper.firstChild);
     other_placeholder.innerHTML = show_form;
   };
-  
+
+// drop area
+
   var drop_area = document.getElementById('files_selection');
 
   ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -51,7 +53,7 @@ function displayForm(this_placeholder, other_placeholder, wrapper, other_wrapper
   function handleFiles(files) {
     files = [...files]
     files.forEach(previewFile);
-    files.forEach(push);
+    files_arr = files_arr.concat(files);
   };
 
   function previewFile(file) {
@@ -64,16 +66,12 @@ function displayForm(this_placeholder, other_placeholder, wrapper, other_wrapper
     };
   };
 
-  function push(file) {
-    files_arr.push(file)
-  };
-
   document.getElementById('form_submit').onclick = function sendFormData() {
     url = window.location.href
     let formData = new FormData(document.querySelector("form"));
+    formData.delete('upload')
     files_arr.forEach(processFile);
     function processFile(file) {
-      console.log(file)
       formData.append('upload', file);
     };
     fetch(url, {
@@ -84,6 +82,17 @@ function displayForm(this_placeholder, other_placeholder, wrapper, other_wrapper
     /*.then(() => { ready });
     .catch(() => { error });*/
 
+// file input
+
+  var finput = document.getElementById('id_upload');
+
+  finput.addEventListener('change', handleInput, false);
+
+  function handleInput() {
+    let files = this.files;
+    files = [...files];
+    handleFiles(files);
+    };
 };
 
 
