@@ -2,7 +2,7 @@ function displayForm(this_placeholder, other_placeholder, wrapper, other_wrapper
 
   const form = `<form method="POST" enctype="multipart/form-data">
     <input type="hidden" name="csrfmiddlewaretoken" value="` + csrf_token + `">
-    <div class="input_form" border="0" cellpadding="0" cellspacing="0">
+    <div class="input_form">
         <input type="text" name="author" class="textinput" placeholder="Автор" maxlength="100" id="id_author">
         <input type="text" name="subject" class="textinput" placeholder="Тема" maxlength="100" id="id_subject">
         <textarea name="text" class="textarea" placeholder="Текст сообщения" maxlength="3000" required="" id="id_text"></textarea>
@@ -34,6 +34,22 @@ function displayForm(this_placeholder, other_placeholder, wrapper, other_wrapper
     drop_area.addEventListener(eventName, preventDefaults, false)
   });
 
+  ['dragenter', 'dragover'].forEach(eventName => {
+    drop_area.addEventListener(eventName, highlight, false)
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    drop_area.addEventListener(eventName, unhighlight, false)
+  });
+
+  function highlight(e) {
+    drop_area.classList.add('highlight')
+  };
+
+  function unhighlight(e) {
+    drop_area.classList.remove('highlight')
+  };
+
   drop_area.addEventListener('drop', handleDrop, false);
 
   function preventDefaults (e) {
@@ -42,8 +58,7 @@ function displayForm(this_placeholder, other_placeholder, wrapper, other_wrapper
   };
 
   function handleDrop(e) {
-    let dt = e.dataTransfer
-    let files = dt.files
+    let files = e.dataTransfer.files
 
     handleFiles(files)
   };

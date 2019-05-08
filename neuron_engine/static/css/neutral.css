@@ -184,6 +184,7 @@ width: auto;
 .post_content_wrapper_single {
 display: grid;
 grid-template-columns: auto auto;
+grid-template-rows: auto;
 /*grid-template-columns: repeat(auto-fit, minmax(220px, auto));*/
 align-items: start;
 justify-content: start;
@@ -222,7 +223,6 @@ max-width: inherit;
 
 .multiple_file_container {
 display: inline-block;
-float: left;
 height: 230px;
 width: 220px;
 margin: 0 0 20px 0;
@@ -255,6 +255,19 @@ float: left;
 margin: 0 25px 5px 0;
 }
 
+.single_pic_expanded {
+display: block;
+width: min-content;
+height: min-content;
+margin-bottom: 25px;
+}
+
+.single_pic_expanded img {
+max-width: 85vw;
+max-height: 90vh;
+object-fit: contain;
+}
+
 .multiple_pic_wrapper {
 position: relative;
 top: 2em;
@@ -262,11 +275,28 @@ width: 100%;
 height: 200px;
 }
 
+.multiple_pic_wrapper .no_thumbnail {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
 .multiple_pic {
 position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
+}
+
+.multiple_pic_expanded {
+
+}
+
+.multiple_pic_expanded img {
+max-width: 85vw;
+max-height: 90vh;
+object-fit: contain;
 }
 
 .thumbnail {
@@ -455,6 +485,10 @@ margin-top: 10px;
 width: 60vw;
 border-radius: 3px;
 border: 1px #dadada dashed;
+}
+
+#files_selection.highlight {
+background-color: #585373;
 }
 
 #images {

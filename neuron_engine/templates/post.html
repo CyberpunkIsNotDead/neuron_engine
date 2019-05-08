@@ -9,24 +9,22 @@
             {{ full_name }}
           </div>
           <div class="post_content_wrapper_single">
-            <div class="single_pic">
-              <a href="{{ file.upload.url }}">
+              <a class="single_pic" href="{{ file.upload.url }}">
                 <img class="thumbnail" src="{{ file.thumbnail.url }}">
               </a>
-            </div>
           {% else %}
             <div class="single_file_info">
               {{ size|filesizeformat }},
               {{ full_name }}
             </div>
             <div class="post_content_wrapper_single">
-            <div class="single_pic">
-              <div class="no_thumbnail">
-                <a href="{{ file.upload.url }}">
-                  Нет уменьшенной копии
-                </a>
+              <div style="margin: 0 25px 5px 0;">
+                <div class="no_thumbnail">
+                  <a href="{{ file.upload.url }}">
+                    Нет уменьшенной копии
+                  </a>
+                </div>
               </div>
-            </div>
           {% endif %}
         {% endfor %}
       <div class="text" onresize="resizeTextWidth(this)">{{ post.text|linebreaksbr }}</div>
@@ -45,11 +43,9 @@
               </div>
               <div class="full_filename" style="overflow:hidden;"></div>
               <div class="multiple_pic_wrapper">
-                <div class="multiple_pic">
-                  <a href="{{ file.upload.url }}">
+                  <a class="multiple_pic" href="{{ file.upload.url }}">
                     <img class="thumbnail" src="{{ file.thumbnail.url }}">
                   </a>
-                </div>
               </div>
             </div>
           {% else %}
@@ -61,13 +57,11 @@
                 {{ short_name }}
               </div>
               <div class="multiple_pic_wrapper">
-                <div class="multiple_pic">
                   <div class="no_thumbnail">
                     <a href="{{ file.upload.url }}">
                       Нет уменьшенной копии
                     </a>
                   </div>
-                </div>
               </div>
             </div>
           {% endif %}
