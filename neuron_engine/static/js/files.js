@@ -1,20 +1,3 @@
-function showFullName(obj, full_name) {
-  obj.innerHTML=full_name;
-  obj.style.backgroundColor='black';
-  obj.style.minWidth='16em';
-  obj.style.width='auto';
-  obj.style.overflow='visible';
-  obj.style.zIndex='2';
-};
-
-function showShortName(obj, size, short_name) {
-  obj.innerHTML=size+', '+short_name;
-  obj.style.backgroundColor='transparent';
-  obj.style.width='16em';
-  obj.style.overflow='hidden';
-  obj.style.zIndex='1';
-};
-
 var single_pics = document.getElementsByClassName('single_pic');
 
 var links = {};
@@ -72,13 +55,13 @@ function expandMultiplePic(e) {
 
   this.innerHTML = '<img src="' + link + '">';
   this.className = 'multiple_pic_expanded';
-  this.parentNode.style.height = 'min-content';
-  this.parentNode.style.width = 'min-content';
 
-  this.parentNode.parentNode.style.height = 'auto';
-  this.parentNode.parentNode.style.width = 'auto';
-  this.parentNode.parentNode.style.display = 'block';
-  this.parentNode.parentNode.style.margin = '10px 10px';
+  this.parentNode.style.height = 'auto';
+  this.parentNode.style.width = 'auto';
+  this.parentNode.style.marginBottom = '10px';
+
+  this.parentNode.children[0].children[0].style.display = 'none';
+  this.parentNode.children[0].children[1].style.display = 'block';
 
   this.removeEventListener("click", expandMultiplePic, false);
   this.addEventListener("click", collapseMultiplePic, false);
@@ -92,13 +75,13 @@ function collapseMultiplePic(e) {
 
   this.innerHTML = '<img class="thumbnail" src="' + thumb_link + '">';
   this.className = 'multiple_pic';
+
   this.parentNode.style.height = '';
   this.parentNode.style.width = '';
+  this.parentNode.style.marginBottom = '';
 
-  this.parentNode.parentNode.style.height = '';
-  this.parentNode.parentNode.style.width = '';
-  this.parentNode.parentNode.style.display = '';
-  this.parentNode.parentNode.style.margin = '';
+  this.parentNode.children[0].children[0].style.display = '';
+  this.parentNode.children[0].children[1].style.display = 'none';
 
   this.removeEventListener("click", collapseMultiplePic, false);
   this.addEventListener("click", expandMultiplePic, false);

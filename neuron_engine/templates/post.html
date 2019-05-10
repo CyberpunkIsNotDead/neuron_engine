@@ -35,34 +35,25 @@
         {% for file, short_name, full_name, size in files %}
           {% if file.thumbnail %}
             <div class="multiple_file_container">
-              <div class="multiple_file_info"
-                onmouseover="showFullName(this, '{{ full_name }}')"
-                onmouseout="showShortName(this, '{{ size|filesizeformat }}', '{{ short_name }}')">
-                {{ size|filesizeformat }},
-                {{ short_name }}
+              <div class="multiple_file_info">
+                <div class="short_filename">{{ size|filesizeformat }}, {{ short_name }}</div>
+                <div class="full_filename" style="display: none;">{{ size|filesizeformat }}, {{ full_name }}</div>
               </div>
-              <div class="full_filename" style="overflow:hidden;"></div>
-              <div class="multiple_pic_wrapper">
-                  <a class="multiple_pic" href="{{ file.upload.url }}">
-                    <img class="thumbnail" src="{{ file.thumbnail.url }}">
-                  </a>
-              </div>
+              <a class="multiple_pic" href="{{ file.upload.url }}">
+                <img class="thumbnail" src="{{ file.thumbnail.url }}">
+              </a>
             </div>
           {% else %}
             <div class="multiple_file_container">
-              <div class="multiple_file_info"
-                onmouseover="showFullName(this, '{{ full_name }}')"
-                onmouseout="showShortName(this, '{{ size|filesizeformat }}', '{{ short_name }}')">
-                {{ size|filesizeformat }},
-                {{ short_name }}
+              <div class="multiple_file_info">
+                <div class="short_filename">{{ size|filesizeformat }}, {{ short_name }}</div>
+                <div class="full_filename" style="display: none;">{{ size|filesizeformat }}, {{ full_name }}</div>
               </div>
-              <div class="multiple_pic_wrapper">
-                  <div class="no_thumbnail">
-                    <a href="{{ file.upload.url }}">
-                      Нет уменьшенной копии
-                    </a>
-                  </div>
-              </div>
+                <div class="no_thumbnail">
+                  <a href="{{ file.upload.url }}">
+                    Нет уменьшенной копии
+                  </a>
+                </div>
             </div>
           {% endif %}
         {% endfor %}

@@ -222,10 +222,8 @@ max-width: inherit;
 }
 
 .multiple_file_container {
-display: inline-block;
-height: 230px;
-width: 220px;
-margin: 0 0 20px 0;
+display: inline-grid;
+margin: 0 10px 20px 10px;
 }
 
 .single_file_info {
@@ -240,13 +238,20 @@ max-width: inherit;
 
 .multiple_file_info {
 display: block;
-position: absolute;
-display: block;
-padding: 5px 8px;
+position: relative;
+margin-bottom: 10px;
 color: #bfbfbf;
+width: auto;
 font-size: 80%;
+}
+
+.short_filename {
+display: block;
 text-align: center;
-width: 16em;
+}
+
+.full_filename {
+display: none;
 }
 
 .single_pic {
@@ -264,13 +269,12 @@ margin-bottom: 25px;
 
 .single_pic_expanded img {
 max-width: 85vw;
-max-height: 90vh;
+max-height: 85vh;
 object-fit: contain;
 }
 
 .multiple_pic_wrapper {
 position: relative;
-top: 2em;
 width: 100%;
 height: 200px;
 }
@@ -283,10 +287,9 @@ transform: translate(-50%, -50%);
 }
 
 .multiple_pic {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
+display: grid;
+align-items: center;
+justify-items: center;
 }
 
 .multiple_pic_expanded {
@@ -295,7 +298,7 @@ transform: translate(-50%, -50%);
 
 .multiple_pic_expanded img {
 max-width: 85vw;
-max-height: 90vh;
+max-height: 85vh;
 object-fit: contain;
 }
 
@@ -398,12 +401,14 @@ color: #eeeeee;
 text-decoration: none;
 background-color: none;
 text-shadow: 0px 0px 2px #fc7d7d;
+outline: none;
 }
 
 a:hover, a:active {
 color: #ff9999;
 background-color: transparent;
 text-shadow: 0px 0px 2px white;
+outline: none;
 }
 
 header {
