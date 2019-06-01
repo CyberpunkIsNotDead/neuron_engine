@@ -25,7 +25,8 @@ def create_post(board, original_post, form, uploads): # form(request.POST, reque
 
         markup = markup_text(
             board,
-            wakaba_mark,
+            markdown_tags,
+            markdown_other,
             form.cleaned_data['text']
             )
 
@@ -108,7 +109,8 @@ def create_thread(board, form, uploads): # form(request.POST, request.FILES)
 
         markup = markup_text(
             board,
-            wakaba_mark,
+            markdown_tags,
+            markdown_other,
             form.cleaned_data['text']
             )
 
