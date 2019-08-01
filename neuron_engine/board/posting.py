@@ -9,6 +9,7 @@ from .thumbnail import *
 from .upload_validation import *
 
 import os
+import errno
 import time
 
 ''' posting '''
@@ -78,6 +79,13 @@ def create_post(board, original_post, form, uploads): # form(request.POST, reque
                 new_name = timestamp + '-' + upload.name
                 upl_path = os.path.join(board.url, new_name)
                 save_path = os.path.join(settings.MEDIA_ROOT, upl_path)
+
+                if not os.path.exists(os.path.dirname(save_path)):
+                        try:
+                            os.makedirs(os.path.dirname(save_path))
+                        except OSError as exc:
+                            if exc.errno != errno.EEXIST:
+                                raise
 
                 with open(save_path, 'wb+') as destination:
                     for chunk in upload.chunks():
@@ -159,6 +167,13 @@ def create_thread(board, form, uploads): # form(request.POST, request.FILES)
                 new_name = timestamp + '-' + upload.name
                 upl_path = os.path.join(board.url, new_name)
                 save_path = os.path.join(settings.MEDIA_ROOT, upl_path)
+
+                if not os.path.exists(os.path.dirname(save_path)):
+                        try:
+                            os.makedirs(os.path.dirname(save_path))
+                        except OSError as exc:
+                            if exc.errno != errno.EEXIST:
+                                raise
 
                 with open(save_path, 'wb+') as destination:
                     for chunk in upload.chunks():
